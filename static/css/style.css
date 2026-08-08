@@ -47,3 +47,50 @@ nav a:hover {
 	color: #c9a66b;
 	border-bottom: 2px solid #c9a66b;
 }
+
+footer {
+	background-color: #1e1e1e;
+	color: #ccc;
+	margin-top: 30px;
+}
+
+.footerbox {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 40px 30px;
+	max-width: 1100px;
+	margin: 0 auto;
+}
+
+.col {
+	display: flex;
+	flex-direction: column;
+	/* min-width: 160px; */
+	margin-bottom: 20px;
+}
+
+.col h3 {
+	color: #ffffff;
+	font-size: 15px;
+	letter-spacing: 2px;
+	margin-bottom: 10px;
+}
+
+.col a {
+	color: #ccc;
+	text-decoration: none;
+	font-size: 14px;
+	margin-bottom: 8px;
+}
+
+.col a:hover {
+	color: #c9a66b;
+}
+
+.bottomtext {
+	border-top: 1px solid #3a3a3a;
+	text-align: center;
+	padding: 15px;
+	font-size: 13px;
+}

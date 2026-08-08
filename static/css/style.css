@@ -1,3 +1,8 @@
+.logo {
+	display: flex;
+	align-items: center;
+}
+
 .logotext{
     display: flex;
 	flex-direction: column;

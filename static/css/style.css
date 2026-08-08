@@ -1,3 +1,12 @@
+header {
+	background-color: #1e1e1e;
+	padding: 15px 30px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
 .logo {
 	display: flex;
 	align-items: center;
@@ -5,6 +14,7 @@
 
 .logotext{
     display: flex;
+    color: #fff;
 	flex-direction: column;
 }
 
@@ -16,4 +26,24 @@
 .logo2 {
 	color: #c9a66b;
 	font-size: 12px;
+}
+
+nav {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+nav a {
+	color: #f2f2f2;
+	text-decoration: none;
+	font-size: 14px;
+	letter-spacing: 1px;
+	padding-bottom: 5px;
+	margin-right: 25px;
+	border-bottom: 2px solid #1e1e1e;
+}
+
+nav a:hover {
+	color: #c9a66b;
+	border-bottom: 2px solid #c9a66b;
 }

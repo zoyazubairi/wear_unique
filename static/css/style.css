@@ -1,0 +1,14 @@
+.logotext{
+    display: flex;
+	flex-direction: column;
+}
+
+.logo1 {
+	font-style: italic;
+	font-size: 24px;
+}
+
+.logo2 {
+	color: #c9a66b;
+	font-size: 12px;
+}

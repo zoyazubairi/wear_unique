@@ -48,6 +48,18 @@ nav a:hover {
 	border-bottom: 2px solid #c9a66b;
 }
 
+.icons {
+	display: flex;
+}
+
+.iconbox {
+	margin-right: 15px;
+}
+
+.iconbox:hover {
+	opacity: 0.6;
+}
+
 footer {
 	background-color: #1e1e1e;
 	color: #ccc;

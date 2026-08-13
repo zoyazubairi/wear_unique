@@ -74,6 +74,18 @@ nav a:hover {
 	margin-bottom: 30px;
 }
 
+.gallery img {
+	width: 100%;
+	border: 1px solid #eee;
+	display: block;
+}
+
+.photobox {
+	width: 48%;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
 .info {
 	width: 50%;
 	padding-top: 10px;

@@ -60,6 +60,25 @@ nav a:hover {
 	opacity: 0.6;
 }
 
+.buybox {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 70px 30px;
+}
+
+.gallery {
+	width: 46%;
+	margin-right: 4%;
+	margin-bottom: 30px;
+}
+
+.info {
+	width: 50%;
+	padding-top: 10px;
+}
+
 footer {
 	background-color: #1e1e1e;
 	color: #ccc;

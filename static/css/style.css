@@ -1,3 +1,9 @@
+body{
+	margin: 0;
+	font-family: 'Poppins', Arial, sans-serif;
+	color: #333;
+}
+
 header {
 	background-color: #1e1e1e;
 	padding: 15px 30px;
@@ -12,6 +18,10 @@ header {
 	align-items: center;
 }
 
+.logo img {
+	margin-right: 10px;
+}
+
 .logotext{
     display: flex;
     color: #fff;
@@ -19,13 +29,18 @@ header {
 }
 
 .logo1 {
+	font-family: 'Playfair Display', serif;
 	font-style: italic;
+	color: #ffffff;
 	font-size: 24px;
+	letter-spacing: 1px;
 }
 
 .logo2 {
+
 	color: #c9a66b;
 	font-size: 12px;
+	letter-spacing: 4px;
 }
 
 nav {
@@ -112,6 +127,7 @@ nav a:hover {
 }
 
 .title {
+	font-family: 'Playfair Display', serif;
 	font-style: italic;
 	font-size: 36px;
 	margin-bottom: 15px;

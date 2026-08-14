@@ -154,7 +154,7 @@ footer {
 	margin-top: 30px;
 }
 
-.buy_cart_btn {
+.buybtn {
 	background-color: #1e1e1e;
 	color: #ffffff;
 	border: none;
@@ -166,7 +166,7 @@ footer {
 	cursor: pointer;
 }
 
-.buy_cart_btn:hover {
+.buybtn:hover {
 	background-color: #c9a66b;
 }
 
@@ -248,6 +248,9 @@ footer {
 	color: #777;
 } 
 
+.uploadform {
+	margin-top: 20px;
+}
 .footerbox {
 	display: flex;
 	flex-wrap: wrap;

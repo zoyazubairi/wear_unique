@@ -101,11 +101,52 @@ nav a:hover {
 	cursor: pointer;
 }
 
+.trybtn:hover {
+	background-color: #c9a66b;
+}
+
 .info {
 	width: 50%;
 	padding-top: 10px;
 }
 
+.title {
+	font-style: italic;
+	font-size: 36px;
+	margin-bottom: 15px;
+}
+
+.price {
+	font-size: 26px;
+	color: #c9a66b;
+	margin-bottom: 30px;
+}
+
+.label {
+	font-size: 14px;
+	color: #777;
+	margin-bottom: 10px;
+}
+
+.sizebox {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 30px;
+}
+
+.size {
+	border: 1px solid black;
+	padding: 10px 16px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.size:hover {
+	background-color: #1e1e1e;
+	color: #ffffff;
+}
 footer {
 	background-color: #1e1e1e;
 	color: #ccc;

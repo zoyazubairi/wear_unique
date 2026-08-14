@@ -182,6 +182,18 @@ footer {
 	margin-bottom: 8px;
 }
 
+.usprow {
+	border-top: 1px solid #eee;
+	padding-top: 20px;
+}
+
+.upsitem {
+	width: 24% ;
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+}
+
 .footerbox {
 	display: flex;
 	flex-wrap: wrap;

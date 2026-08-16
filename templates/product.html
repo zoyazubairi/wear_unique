@@ -39,48 +39,34 @@
 
         <div class="buybox">
 
-            <div class="gallery">
+                <div class="gallery">
+                {% for galleryimage in colorlist %}
                 <div class="photobox">
-                    <img src="/static/images/polo-navy.webp" alt="Navy Polo">
-
-                    <button class="trybtn" type="submit">Try Now</button>
-                </div>
-                <div class="photobox">
-                    <img src="/static/images/polo-marinegreen.webp" alt="Marine Green">
-
-                    <button class="trybtn" type="submit">Try Now</button>
-                </div>
-                <div class="photobox">
-                    <img src="/static/images/polo-royalblue.webp" alt="Royal Blue">
-
-                    <button class="trybtn" type="submit">Try Now</button>
-                </div>
-                <div class="photobox">
-                    <img src="/static/images/polo-oatmeal.webp" alt="Oatmeal Polo">
+                    <img src="/static/{{ galleryimage.image }}" alt="{{ galleryimage.color }}">
 
                     <button class="trybtn" type="submit">Try Now</button>
                 </div>
 
+                {% endfor %}
             </div>
 
             <div class="info">
                 <h2 class="title">{{product.title}}</h2>
-                <p  class="price">{{product.price}}</p>
+                <p  class="price">${{product.price}}</p>
 
                 <p class="label">Select Color</p>
 
-                <div class="sizebox">
-                    <div class="size">Navy</div>
-                    <div class="size">Marine Green</div>
-                    <div class="size">Royal Blue</div>
-                    <div class="size">Oatmeal</div>
+                <div class="colorbox">
+                    {% for item in colorlist %}
+                        <div class="color">{{ item.color}}</div>
+                    {% endfor %}
                 </div>
 
                 <button class="buybtn">Buy Now</button>
 
                 <p class="label">Product Details</p>
                 <ul class="detailslist">
-                    <li>Regular fit short sleeve polo made from cotton blend.</li>
+                    <li>{{product.description}}</li>
                     <li>Care: Machine wash cold</li>
                 </ul>
 

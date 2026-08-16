@@ -13,10 +13,15 @@ mycursor = mydb.cursor(dictionary=True)
 
 @app.get("/product/{id}")
 async def product_page(request: Request, id: str):
-    mycursor.execute("SHOW * FROM products WHERE id = %s", (id,))
-        
-    product = mycursor.fetchnone()
+    mycursor.execute("SELECT * FROM products WHERE id = %s", (id,))
+    product = mycursor.fetchone()
+
+    mycursor.execute("SELECT * FROM variants WHERE product_id = %s", (product["id"],))
+    colorlist = mycursor.fetchall()
+    
     return templates.TemplateResponse(request, "product.html", {
-        "product": product})
+        "product": product,
+        "colorlist": colorlist
+        })
 
 

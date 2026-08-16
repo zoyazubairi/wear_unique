@@ -145,13 +145,13 @@ nav a:hover {
 	margin-bottom: 10px;
 }
 
-.sizebox {
+.colorbox {
 	display: flex;
 	flex-wrap: wrap;
 	margin-bottom: 30px;
 }
 
-.size {
+.color {
 	border: 1px solid black;
 	padding: 10px 16px;
 	margin-right: 10px;
@@ -160,7 +160,7 @@ nav a:hover {
 	cursor: pointer;
 }
 
-.size:hover {
+.color:hover {
 	background-color: #1e1e1e;
 	color: #ffffff;
 }

@@ -43,8 +43,10 @@
                 {% for galleryimage in colorlist %}
                 <div class="photobox">
                     <img src="/static/{{ galleryimage.image }}" alt="{{ galleryimage.color }}">
-
-                    <button class="trybtn" type="submit">Try Now</button>
+                    <form method="post" action="/product/{{ product.id }}">
+                            <input type="hidden" name="chosenimg" value="{{ galleryimage.image}}">
+                            <button class="trybtn" type="submit">Try Now</button>
+                    </form>
                 </div>
 
                 {% endfor %}
@@ -111,7 +113,11 @@
 
             <div class="tryonrow">
                 <div class="tryonbox">
-                    <img src="/static/images/polo-navy.webp" alt="Navy Polo">
+                    {% if chosenpic%}
+                        <img src="/static/{{ chosenpic }}">
+                    {% else %}
+                        <p>Chosen Pic</p>
+                    {% endif %}
                 </div>
 
                 <div class="tryonsign">+</div>

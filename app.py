@@ -11,8 +11,21 @@ templates = Jinja2Templates(directory="templates")
 mydb = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="wear_unique")
 mycursor = mydb.cursor(dictionary=True)
 
-@app.get("/product/{id}")
+@app.api_route("/product/{id}", methods=["GET", "POST"])
 async def product_page(request: Request, id: str):
+    
+    chosenpic = None
+    showupload = False
+    
+    if request.method == "POST":
+        showupload = True
+        form = await request.form()
+        clickedimg = form.get("chosenimg")
+        
+        if clickedimg:
+            chosenpic = clickedimg
+            showupload = True
+            
     mycursor.execute("SELECT * FROM products WHERE id = %s", (id,))
     product = mycursor.fetchone()
 
@@ -25,7 +38,9 @@ async def product_page(request: Request, id: str):
     return templates.TemplateResponse(request, "product.html", {
         "product": product,
         "colorlist": colorlist,
-        "sizelist": sizelist
+        "sizelist": sizelist,
+        "chosenpic": chosenpic,
+        "showupload": showupload
         })
 
 

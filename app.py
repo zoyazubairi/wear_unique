@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form, File, UploadFile
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 import mysql.connector
@@ -42,5 +42,9 @@ async def product_page(request: Request, id: str):
         "chosenpic": chosenpic,
         "showupload": showupload
         })
+
+@app.post("/upload")
+async def upload_photo(pid: str = Form(...), chosenpic: str = Form(...), photo: UploadFile = File(...)):
+    print("Product ID: {pid}, Chosen Pic: {chosenpic}, Uploaded File: {photo.filename}")
 
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
-    <head>
+    
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
         <title>Wear Unique</title>
         <link rel="stylesheet" href="/static/css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,174 +11,185 @@
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;400;600&display=swap"
         rel="stylesheet">
 
-    </head>
-    <body>
-        <header>
-            <div class="logo">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="#" class="logolink">
                 <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="40" height="40">
                 <div class="logotext">
                     <span class="logo1">Wear</span>
                     <span class="logo2">Unique</span>
                 </div>
+            </a>
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Women</a>
+            <a href="#">Men</a>
+            <a href="#">Contact</a>
+        </nav>
+
+        <div class="icons">
+            <a href="#" class="iconbox">
+                <img src="/static/images/account.svg" alt="account" width="22" height="22">
+            </a>
+        </div>
+    </header>
+
+    <div class="buybox">
+
+        <div class="gallery">
+            {% for galleryimage in colorlist %}
+            <div class="photobox">
+                <img src="/static/{{ galleryimage.image }}" alt="{{ galleryimage.color }}">
+                <form method="post" action="/product/{{ product.id }}#tryon">
+                    <input type="hidden" name="chosenimg" value="{{ galleryimage.image}}">
+                    <button class="trybtn" type="submit">Try Now</button>
+                </form>
             </div>
+            {% endfor %}
+        </div>
 
-            <nav>
-                <a href="#">Home</a>
-                <a href="#">Women</a>
-                <a href="#">Men</a>
-                <a href="#">Contact</a>
-            </nav>
+        <div class="info">
+            <h2 class="title">{{product.title}}</h2>
+            <p  class="price">{{product.price}} Tk.</p>
 
-            <div class="icons">
-                <a href="#" class="iconbox">
-                    <img src="/static/images/account.svg" alt="account" width="22" height="22">
-                </a>
-                <a href="#" class="iconbox">
-                    <img src="/static/images/cart.svg" alt="cart" width="22" height="22">
-                </a>
-            </div>
-        </header>
+            <p class="label">Select Color</p>
 
-        <div class="buybox">
-
-                <div class="gallery">
-                {% for galleryimage in colorlist %}
-                <div class="photobox">
-                    <img src="/static/{{ galleryimage.image }}" alt="{{ galleryimage.color }}">
-                    <form method="post" action="/product/{{ product.id }}">
-                            <input type="hidden" name="chosenimg" value="{{ galleryimage.image}}">
-                            <button class="trybtn" type="submit">Try Now</button>
-                    </form>
-                </div>
-
+            <div class="sizebox">
+                {% for item in colorlist %}
+                <label class="size">
+                    <input type="radio" name="color" value="{{ item.color }}">
+                    {{ item.color }}
+                </label>
                 {% endfor %}
             </div>
 
-            <div class="info">
-                <h2 class="title">{{product.title}}</h2>
-                <p  class="price">${{product.price}}</p>
-
-                <p class="label">Select Color</p>
-
-                <div class="sizebox">
-                    {% for item in colorlist %}
-                        <label class="size">
-                            <input type="radio" name="color" value="{{ item.color }}">
-                            {{ item.color }}
-                        </label>
-                    {% endfor %}
-                </div>
-
-                <p class="label">Select Size</p>
-
-                <div class="sizebox">
-                    {% for item in sizelist%}
-                    <label class="size">
-                        <input type="radio" name="size" value="{{ item.size }}">
-                        {{ item.size}}
-                    </label> 
-                    {% endfor %}
-               </div>
-
-                <button class="buybtn">Buy Now</button>
-
-                <p class="label">Product Details</p>
-                <ul class="detailslist">
-                    <li>{{product.description}}</li>
-                    <li>Care: Machine wash cold</li>
-                </ul>
-
-                <div class="usprow">
-                    <div class="uspitem">
-                        <img src="/static/images/shipping.svg" alt="free shipping">
-                        <p>Free Shipping</p>
-                    </div>
-                    <div class="uspitem">
-                        <img src="/static/images/returns.svg" alt="easy returns">
-                        <p>Easy Returns</p>
-                    </div>
-                    <div class="uspitem">
-                        <img src="/static/images/secure.svg" alt="secure payment">
-                        <p>Secure Payment</p>
-                    </div>
-                    <div class="uspitem">
-                        <img src="/static/images/quality.svg" alt="certified quality">
-                        <p>Certified Quality</p>
-                    </div>
-                </div>
+            <p class="label">Select Size</p>
+            <div class="sizebox">
+                {% for item in sizelist%}
+                <label class="size">
+                    <input type="radio" name="size" value="{{ item.size }}">
+                    {{ item.size}}
+                </label> 
+                {% endfor %}
             </div>
 
-        </div>
-    
-         <div class="uploadbox">
-            <p class="label">Try It On</p>
+            <button class="buybtn" type="submit">Buy Now</button>
 
-            <div class="tryonrow">
+            <p class="label">Product Details</p>
+            <ul class="detailslist">
+                <li>{{ product.description }}</li>
+                <li>Care: Machine wash cold</li>
+            </ul>
+
+            <div class="usprow">
+                <div class="uspitem">
+                    <img src="/static/images/shipping.svg" alt="free shipping">
+                    <p>Free Shipping</p>
+                </div>
+                <div class="uspitem">
+                    <img src="/static/images/returns.svg" alt="easy returns">
+                    <p>Easy Returns</p>
+                </div>
+                <div class="uspitem">
+                    <img src="/static/images/secure.svg" alt="secure payment">
+                    <p>Secure Payment</p>
+                </div>
+                <div class="uspitem">
+                    <img src="/static/images/quality.svg" alt="certified quality">
+                    <p>Certified Quality</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="uploadbox" id="tryon">
+        <p class="label">Try It On</p>
+
+        <div class="tryonrow">
+            
+            <div class="tryoncol">
                 <div class="tryonbox">
-                    {% if chosenpic%}
-                        <img src="/static/{{ chosenpic }}">
+                    {% if chosenpic %}
+                    <img src="/static/{{ chosenpic }}">
                     {% else %}
-                        <p>Chosen Pic</p>
+                    <p>Chosen Pic</p>
                     {% endif %}
                 </div>
-
-                <div class="tryonsign">+</div>
-
-                <div class="tryonbox greybox"></div>
-
-                <div class="tryonsign">=</div>
-
-                <div class="tryonbox">
-                    <p>Final Photo</p>
-                </div>
-
+                <form method="post" action="/upload" enctype="multipart/form-data" class="uploadform">
+                    <input type="hidden" name="pid" value="{{ product.id }}">
+                    <input type="hidden" name="chosenimg" value="{{ chosenpic }}">
+                    <label class="filebtn">Choose Photo
+                        <input type="file" name="photo">
+                    </label>
+                    <button class="buybtn fileuploadbtn" type="submit">Upload</button>
+                </form>
             </div>
-            
-            <div class="uploadform">
-                <input type="file" name="photo">
-                <button class="buybtn">Upload</button>
+
+
+            <div class="tryonsign">+</div>
+
+            <div class="tryoncol">
+                <div class="tryonbox magicbox">
+                    <img class="magicicon" src="/static/images/magic.svg" alt="AI">
+                    <p>AI Magic</p>
+
+                </div>
+            </div>
+
+
+            <div class="tryonsign">=</div>
+
+            <div class="tryoncol">
+                <div class="tryonbox">
+                     <p>Final Photo</p>
+                </div>
+                <a class="buybtn downloadbtn" href="/static/uploads/{{ resultpic}}"download>Save Photo</a>             
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerbox">
+            <div class="col">
+                <div class="logo">
+                    <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="34" height="34">
+                    <div class="logotext">
+                        <span class="logo1">Wear</span>
+                        <span class="logo2">Unique</span>
+                    </div>
+                </div>
+                <p>Trendy and affordable clothing for everyone.</p>
+            </div>
+
+            <div class="col">
+                <h3>Shop</h3>
+                <a href="#">Women</a>
+                <a href="#">Men</a>
+            </div>
+            <div class="c<div class="tryoncol">ol">
+                <h3>Help</h3>
+                <a href="#">Contact Us</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQ</a>
+            </div>
+            <div class="col">
+                <h3>Follow Us</h3>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Pinterest</a>
             </div>
         </div>
 
-        <footer>
-            <div class="footerbox">
-                <div class="col">
-                    <div class="logo">
-                        <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="34" height="34">
-                        <div class="logotext">
-                            <span class="logo1">Wear</span>
-                            <span class="logo2">Unique</span>
-                        </div>
-                    </div>
-                    <p>Trendy and affordable clothing for everyone.</p>
-                </div>
-
-                <div class="col">
-                    <h3>Shop</h3>
-                    <a href="#">Women</a>
-                    <a href="#">Men</a>
-                </div>
-
-                <div class="col">
-                    <h3>Help</h3>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Shipping</a>
-                    <a href="#">Returns</a>
-                    <a href="#">FAQ</a>
-                </div>
-
-                <div class="col">
-                    <h3>Follow Us</h3>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                    <a href="#">Pinterest</a>
-                </div>
-            </div>
-
-            <div class="bottomtext">
-                <p>&copy; 2026 Wear Unique. All rights reserved.</p>
-            </div>
-        </footer>
-    </body>
+        <div class="bottomtext">
+            <p>&copy; 2026 Wear Unique. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
 
 </html>

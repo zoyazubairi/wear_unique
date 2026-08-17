@@ -1,3 +1,14 @@
+html {
+	scroll-behavior: smooth;
+	user-select: none;
+	-webkit-user-select: none;
+	caret-color: transparent;
+}
+
+#tryon {
+	scroll-margin-top: 160px;
+}
+
 body{
 	margin: 0;
 	font-family: 'Poppins', Arial, sans-serif;
@@ -16,16 +27,23 @@ header {
 .logo {
 	display: flex;
 	align-items: center;
+	
 }
 
-.logo img {
+.logolink {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+}
+
+.logoimg {
 	margin-right: 10px;
 }
 
 .logotext{
     display: flex;
-    color: #fff;
 	flex-direction: column;
+	line-height: 1;
 }
 
 .logo1 {
@@ -37,7 +55,6 @@ header {
 }
 
 .logo2 {
-
 	color: #c9a66b;
 	font-size: 12px;
 	letter-spacing: 4px;
@@ -95,7 +112,7 @@ nav a:hover {
 	object-fit: cover;
 	border: 1px solid #eee;
 	display: block;
-	object-position: center;
+	object-position: top;
 }
 
 .photobox {
@@ -162,9 +179,9 @@ nav a:hover {
 	margin-bottom: 10px;
 	font-size: 14px;
 	cursor: pointer;
-	user-select: none;
+	/* user-select: none;
 	-webkit-user-select: none;
-	caret-color: transparent;
+	caret-color: transparent; */
 }
 
 .size input {
@@ -243,8 +260,27 @@ nav a:hover {
 }
 
 .uploadbox input[type="file"] {
-	margin-right: 15px;
+	display: none;
 }
+
+.filebtn {
+	display: block;
+	width: 360px;
+	box-sizing: border-box;
+	text-align: center;
+	padding: 12px 0;
+	margin-bottom: 8px;
+	border: 1px solid #c9a66b;
+	color: #c9a66b;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.fileuploadbtn {
+	width: 360px;
+	margin-right: 0;
+}
+
 .tryonrow {
 	margin-bottom: 25px;
 	display: flex;
@@ -252,6 +288,10 @@ nav a:hover {
 	align-items: center;
 }
 
+.tryoncol {
+	width: 360px;
+	flex-shrink: 0;
+}
 .tryonbox {
 	width: 350px;
 	height: 350px;

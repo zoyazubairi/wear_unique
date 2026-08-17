@@ -56,11 +56,25 @@
 
                 <p class="label">Select Color</p>
 
-                <div class="colorbox">
+                <div class="sizebox">
                     {% for item in colorlist %}
-                        <div class="color">{{ item.color}}</div>
+                        <label class="size">
+                            <input type="radio" name="color" value="{{ item.color }}">
+                            {{ item.color }}
+                        </label>
                     {% endfor %}
                 </div>
+
+                <p class="label">Select Size</p>
+
+                <div class="sizebox">
+                    {% for item in sizelist%}
+                    <label class="size">
+                        <input type="radio" name="size" value="{{ item.size }}">
+                        {{ item.size}}
+                    </label> 
+                    {% endfor %}
+               </div>
 
                 <button class="buybtn">Buy Now</button>
 

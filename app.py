@@ -16,6 +16,11 @@ templates = Jinja2Templates(directory="templates")
 mydb = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="wear_unique")
 mycursor = mydb.cursor(dictionary=True)
 
+@app.get("/category/{id}")
+async def category_page(request: Request, id: str):
+    print(f"Category ID: {id}")
+    
+
 @app.api_route("/product/{id}", methods=["GET", "POST"])
 async def product_page(request: Request, id: str):
     

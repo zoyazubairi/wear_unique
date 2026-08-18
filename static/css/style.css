@@ -312,6 +312,7 @@ nav a:hover {
 	margin-top: 20px;
 	text-decoration: none;
 	text-align: center;
+	width: 290px;
 }
 
 .magicbox {
@@ -343,7 +344,8 @@ nav a:hover {
 }
 
 .instruction {
-	display:flex
+	display:flex;
+	font-size: 14px;
 }
 
 .filebtn {
@@ -410,3 +412,24 @@ footer {
 	padding: 15px;
 	font-size: 13px;
 }
+
+.homesection {
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 50px 30px;
+}
+
+.sectiontitle {
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	font-size: 28px;
+	margin-bottom: 30px;
+}
+.prodcard {
+	width: 23%;
+	margin-right: 2%;
+	margin-bottom: 30px;
+	text-decoration: none;
+	color: #333;
+}
+

@@ -107,6 +107,7 @@
 
     </div>
     
+    {% if showupload %}
     <div class="uploadbox" id="tryon">
         <p class="label">Try It On</p>
 
@@ -149,50 +150,65 @@
             <div class="tryonsign">=</div>
 
             <div class="tryoncol">
-                <div class="tryonbox">
+                <div class="tryonbox2">
+                {%if resultpic %}
+                <img src="/static/uploads/{{ resultpic }}" alt="try-on result">
+                {% else %}  
+                <p>Final Photo</p>
+                {% endif %} 
                 </div>
-                <a class="buybtn downloadbtn" href="/static/uploads/{{ resultpic}}"download>Save Photo</a>             
+
+                {% if resultpic %}
+                <a class="buybtn downloadbtn" href="/static/uploads/{{ resultpic }}" download>Save Photo</a>
+                {% endif %}
+
             </div>
         </div>
     </div>
+    {% endif %}
 
     <footer>
         <div class="footerbox">
-            <div class="col">
-                <div class="logo">
-                    <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="34" height="34">
-                    <div class="logotext">
-                        <span class="logo1">Wear</span>
-                        <span class="logo2">Unique</span>
-                    </div>
-                </div>
-                <p>Trendy and affordable clothing for everyone.</p>
-            </div>
 
-            <div class="col">
-                <h3>Shop</h3>
-                <a href="#">Women</a>
-                <a href="#">Men</a>
-            </div>
-            <div class="c<div class="tryoncol">ol">
-                <h3>Help</h3>
-                <a href="#">Contact Us</a>
-                <a href="#">Shipping</a>
-                <a href="#">Returns</a>
-                <a href="#">FAQ</a>
-            </div>
-            <div class="col">
-                <h3>Follow Us</h3>
-                <a href="#">Instagram</a>
-                <a href="#">Facebook</a>
-                <a href="#">Pinterest</a>
-            </div>
+        <div class="col">
+            <a href="#" class="logolink">
+                <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="34" height="34">
+                <div class="logotext">
+                    <span class="logo1">Wear</span>
+                    <span class="logo2">Unique</span>
+                </div>
+            </a>
+
+            <p>Trendy and affordable clothing for everyone.</p>
         </div>
+
+        <div class="col">
+            <h3>Shop</h3>
+            <a href="#">Women</a>
+            <a href="#">Men</a>
+        </div>
+
+        <div class="col">
+            <h3>Help</h3>
+            <a href="#">Contact Us</a>
+            <a href="#">Shipping</a>
+            <a href="#">Returns</a>
+            <a href="#">FAQ</a>
+        </div>
+
+        <div class="col">
+            <h3>Follow Us</h3>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Pinterest</a>
+        </div>
+    </div>
 
         <div class="bottomtext">
             <p>&copy; 2026 Wear Unique. All rights reserved.</p>
         </div>
     </footer>
+
 </body>
 
 </html>

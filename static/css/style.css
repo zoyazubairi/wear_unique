@@ -281,7 +281,7 @@ nav a:hover {
 	flex-shrink: 0;
 }
 
-.tryonbox {
+.tryonbox, .tryonbox2{
 	width: 360px;
 	height: 360px;
 	border: 1px solid #c9a66b;
@@ -334,7 +334,8 @@ nav a:hover {
 
 .tryonsign {
 	font-size: 34px;
-	color: #777;
+	color: #c9a66b;
+	margin-top: 150px;
 } 
 
 .uploadform {

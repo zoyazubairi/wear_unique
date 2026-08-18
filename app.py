@@ -20,18 +20,22 @@ mycursor = mydb.cursor(dictionary=True)
 async def product_page(request: Request, id: str):
     
     chosenpic = request.query_params.get("chosen")
-    uploadedpic =request.query_params.get("uploaded")
+    uploadedpic = request.query_params.get("uploaded")
+    resultpic = request.query_params.get("result")
+    tryerror = request.query_params.get("tryerror")
     showupload = False
     
     if request.method == "POST":
         showupload = True
         form = await request.form()
         clickedimg = form.get("chosenimg")
-        print(f"Clicked Image: {clickedimg}")
         
         if clickedimg:
             chosenpic = clickedimg
             showupload = True
+    
+    if chosenpic or uploadedpic:
+        showupload = True
             
     mycursor.execute("SELECT * FROM products WHERE id = %s", (id,))
     product = mycursor.fetchone()
@@ -48,18 +52,63 @@ async def product_page(request: Request, id: str):
         "sizelist": sizelist,
         "chosenpic": chosenpic,
         "uploadedpic": uploadedpic,
-        "showupload": showupload
+        "showupload": showupload,
+        "resultpic": resultpic,
+        "tryerror": tryerror
         })
-    
+
+TRYON_URL = "http://127.0.0.1:8005/tryon/"
+TRYON_TIMEOUT = 300
+
+def run_tryon(person_bytes, chosenimg):
+    try:
+        with open("static/" + chosenimg, "rb") as garment:
+            reply = httpx.post(
+                TRYON_URL, 
+                files = {
+                    "person": person_bytes,
+                    "cloth": garment.read()
+                },
+                timeout = TRYON_TIMEOUT
+                ).json()
+            
+            if not reply.get("success"):
+                return "", reply.get("error") or "Try-on failed"
+            
+            image = httpx.get(
+                reply["output"]["image_url"],
+                timeout = 120
+            ).content
+            
+            result_name = "result_" + uuid.uuid4().hex[:12] + ".jpg"
+            
+            with open("static/uploads/" + result_name, "wb") as f:
+                f.write(image)
+                
+            return result_name, ""
+        
+    except httpx.ConnectError:
+        return "", "Try-on service is not running. Start virtual_try_on on port 8001"
+    except Exception as e:
+        return "", f"Try-on failed: {e}"
 
 @app.post("/upload")
 async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: UploadFile = File(...)):
-    data = await photo.read()
+    result_name = ""
     
-    with open("static/uploads/" + photo.filename, "wb") as f:
-        f.write(data)
+    if not chosenimg:
+        error = "Pick a garment with Try Now first"
+    elif not photo.filename:
+        error =" Choose a photo first"
+    else:
+        result_name, error = run_tryon(
+            await photo.read(),
+            chosenimg
+        )
     
     return RedirectResponse(
-        f"/product/{pid}?chosen={quote(chosenimg)}&uploaded={quote(photo.filename)}",
+        f"/product/{pid}?chosen={quote(chosenimg)}"
+        f"&uploaded={quote(photo.filename)}"
+        f"&result={quote(result_name)}&tryerror={quote(error)}",
         status_code=303
     )

@@ -1,7 +1,12 @@
 from fastapi import FastAPI, Request, Form, File, UploadFile
+from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from datetime import date
 import mysql.connector
+import httpx
+import uuid
+from urllib.parse import quote
 
 app = FastAPI()
 
@@ -14,13 +19,15 @@ mycursor = mydb.cursor(dictionary=True)
 @app.api_route("/product/{id}", methods=["GET", "POST"])
 async def product_page(request: Request, id: str):
     
-    chosenpic = None
+    chosenpic = request.query_params.get("chosen")
+    uploadedpic =request.query_params.get("uploaded")
     showupload = False
     
     if request.method == "POST":
         showupload = True
         form = await request.form()
         clickedimg = form.get("chosenimg")
+        print(f"Clicked Image: {clickedimg}")
         
         if clickedimg:
             chosenpic = clickedimg
@@ -40,11 +47,19 @@ async def product_page(request: Request, id: str):
         "colorlist": colorlist,
         "sizelist": sizelist,
         "chosenpic": chosenpic,
+        "uploadedpic": uploadedpic,
         "showupload": showupload
         })
+    
 
 @app.post("/upload")
-async def upload_photo(pid: str = Form(...), chosenpic: str = Form(...), photo: UploadFile = File(...)):
-    print("Product ID: {pid}, Chosen Pic: {chosenpic}, Uploaded File: {photo.filename}")
-
-
+async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: UploadFile = File(...)):
+    data = await photo.read()
+    
+    with open("static/uploads/" + photo.filename, "wb") as f:
+        f.write(data)
+    
+    return RedirectResponse(
+        f"/product/{pid}?chosen={quote(chosenimg)}&uploaded={quote(photo.filename)}",
+        status_code=303
+    )

@@ -126,6 +126,7 @@
                     <label class="filebtn">Choose Photo
                         <input type="file" name="photo">
                     </label>
+                    <p class="instruction">Upload a clear front-facing photo. Keep your face centered and looking directly at the camera.</p>
                     <button class="buybtn fileuploadbtn" type="submit">Upload</button>
                 </form>
             </div>
@@ -135,9 +136,12 @@
 
             <div class="tryoncol">
                 <div class="tryonbox magicbox">
+                    {% if uploadedpic %}
+                    <img src="/static/uploads/{{ uploadedpic }}">
+                    {% else %}
                     <img class="magicicon" src="/static/images/magic.svg" alt="AI">
                     <p>AI Magic</p>
-
+                    {% endif %}
                 </div>
             </div>
 
@@ -146,7 +150,6 @@
 
             <div class="tryoncol">
                 <div class="tryonbox">
-                     <p>Final Photo</p>
                 </div>
                 <a class="buybtn downloadbtn" href="/static/uploads/{{ resultpic}}"download>Save Photo</a>             
             </div>

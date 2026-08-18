@@ -263,6 +263,88 @@ nav a:hover {
 	display: none;
 }
 
+.tryonrow {
+	margin-bottom: 25px;
+	display: flex;
+	gap: 20px;
+}
+
+.tryoncol,
+.tryonbox,
+.filebtn,
+.fileuploadbtn {
+	width: 100%;
+}
+
+.tryoncol {
+	width: 360px;
+	flex-shrink: 0;
+}
+
+.tryonbox {
+	width: 360px;
+	height: 360px;
+	border: 1px solid #c9a66b;
+	box-sizing: border-box;
+	text-align: center;
+	color: #777;
+	font-size: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	overflow: hidden;
+	background: #fafafa;
+}
+
+.tryonbox p {
+	margin-top: 165px;
+}
+
+.tryonbox img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.downloadbtn {
+	display: inline-block;
+	margin-top: 20px;
+	text-decoration: none;
+	text-align: center;
+}
+
+.magicbox {
+	background: #f7f4ef;
+	border: 1px solid #c9a66b;
+}
+
+.tryonbox img.magicicon {
+	width: 80px;
+	height: 80px;
+	object-fit: contain;
+}
+
+.magicbox p {
+	margin-top: 10px;
+	color: #c9a66b;
+	font-size: 16px;
+	letter-spacing: 1px;
+}
+
+.tryonsign {
+	font-size: 34px;
+	color: #777;
+} 
+
+.uploadform {
+	margin-top: 20px;
+}
+
+.instruction {
+	display:flex
+}
+
 .filebtn {
 	display: block;
 	width: 360px;
@@ -279,50 +361,6 @@ nav a:hover {
 .fileuploadbtn {
 	width: 360px;
 	margin-right: 0;
-}
-
-.tryonrow {
-	margin-bottom: 25px;
-	display: flex;
-	gap: 20px;
-	align-items: center;
-}
-
-.tryoncol {
-	width: 360px;
-	flex-shrink: 0;
-}
-.tryonbox {
-	width: 350px;
-	height: 350px;
-	vertical-align: middle;
-	border: 1px solid #ccc;
-	text-align: center;
-	color: #777;
-	font-size: 16px;
-}
-
-.tryonbox p {
-	margin-top: 165px;
-}
-
-.tryonbox img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-.greybox {
-	background-color: #cccccc;
-}
-
-.tryonsign {
-	font-size: 34px;
-	color: #777;
-} 
-
-.uploadform {
-	margin-top: 20px;
 }
 
 footer {

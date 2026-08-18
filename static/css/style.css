@@ -425,6 +425,11 @@ footer {
 	font-size: 28px;
 	margin-bottom: 30px;
 }
+
+.bestrow {
+	display: flex;
+	flex-wrap: wrap;
+}
 .prodcard {
 	width: 23%;
 	margin-right: 2%;
@@ -433,3 +438,22 @@ footer {
 	color: #333;
 }
 
+.prodcard img {
+	width: 100%;
+	height: 320px;
+	object-fit: cover;
+	display: block;
+	margin-bottom: 12px;
+	object-position: top;
+}
+
+.cardtitle {
+	font-size: 15px;
+	margin: 0 0 6px 0;
+}
+
+.cardprice {
+	font-size: 15px;
+	color: #c9a66b;
+	margin: 0;
+}

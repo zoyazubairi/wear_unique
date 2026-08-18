@@ -27,8 +27,8 @@
 
         <nav>
             <a href="#">Home</a>
-            <a href="#">Women</a>
-            <a href="#">Men</a>
+            <a href="/category/1">Women</a>
+            <a href="/category/2">Men</a>
             <a href="#">Contact</a>
         </nav>
 
@@ -40,17 +40,17 @@
     </header>
 
     <div class="homesection">
-    <h2 class="sectiontitle">Women</h2>
+    <h2 class="sectiontitle">{{category.name}}</h2>
 
     <div class="bestrow">
         {% for item in productlist %}
-        <a href="/product/{{ item. id }}" class="prodcard">
+        <a href="/product/{{ item.id }}" class="prodcard">
             <img src="/static/{{ item.image }}" alt="{{ item.title}}">
             <p class="cardtitle">{{ item.title }}</p>
             <p class="cardprice">{{ item.price }} TK</p>
         </a>
-        </div>
         {% endfor %}
+        </div>
     </div>
 
     </div>
@@ -72,8 +72,8 @@
 
         <div class="col">
             <h3>Shop</h3>
-            <a href="#">Women</a>
-            <a href="#">Men</a>
+            <a href="/category/1">Women</a>
+            <a href="/category/2">Men</a>
         </div>
 
         <div class="col">

@@ -18,8 +18,21 @@ mycursor = mydb.cursor(dictionary=True)
 
 @app.get("/category/{id}")
 async def category_page(request: Request, id: str):
-    print(f"Category ID: {id}")
+    mycursor.execute("SELECT * FROM categories WHERE id = %s", (id,))
+    category = mycursor.fetchone()
     
+    mycursor.execute("SELECT * FROM products WHERE category_id = %s", (id,))
+    productlist = mycursor.fetchall()
+    
+    for item in productlist:
+        mycursor.execute("SELECT * FROM variants WHERE product_id = %s LIMIT 1", (item["id"],))
+        first = mycursor.fetchone()
+        item["image"] = first["image"]
+    
+    return templates.TemplateResponse(request, "shop.html", {
+        "category": category,
+        "productlist": productlist
+    })
 
 @app.api_route("/product/{id}", methods=["GET", "POST"])
 async def product_page(request: Request, id: str):
@@ -100,6 +113,9 @@ def run_tryon(person_bytes, chosenimg):
 @app.post("/upload")
 async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: UploadFile = File(...)):
     result_name = ""
+    
+    # with open("static/uploads/" + photo.filename, "wb") as f:
+    #     f.write(await photo.read())
     
     if not chosenimg:
         error = "Pick a garment with Try Now first"

@@ -297,6 +297,10 @@ nav a:hover {
 	background: #fafafa;
 }
 
+.tryonbox2 img {
+    width: -webkit-fill-available;
+}
+
 .tryonbox p {
 	margin-top: 165px;
 }

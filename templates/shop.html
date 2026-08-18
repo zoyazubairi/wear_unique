@@ -43,23 +43,14 @@
     <h2 class="sectiontitle">Women</h2>
 
     <div class="bestrow">
-        <div class="prodcard">
-            <img src="/static/images/women/p1-pink-red.jpg" alt="Pink/Red">
-            <p class="cardtitle">Striped T-Shirt</p>
-            <p class="cardprice">1290.00 TK</p>
+        {% for item in productlist %}
+        <a href="/product/{{ item. id }}" class="prodcard">
+            <img src="/static/{{ item.image }}" alt="{{ item.title}}">
+            <p class="cardtitle">{{ item.title }}</p>
+            <p class="cardprice">{{ item.price }} TK</p>
+        </a>
         </div>
-
-        <div class="prodcard">
-            <img src="/static/images/women/p2-pink.jpg" alt="Pink">
-            <p class="cardtitle">Tight T-Shirt</p>
-            <p class="cardprice">1190.00 TK</p>
-        </div>
-
-        <div class="prodcard">
-            <img src="/static/images/women/p3-pink-red.jpg" alt="Pink/Red">
-            <p class="cardtitle">Striped Longsleeve</p>
-            <p class="cardprice">1490.00 TK</p>
-        </div>
+        {% endfor %}
     </div>
 
     </div>

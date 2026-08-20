@@ -2,17 +2,15 @@
 <html>
     
 <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" >
-        <title>Wear Unique</title>
-        <link rel="stylesheet" href="/static/css/style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
+    <meta name="viewport" content="width=device-width, initial-scale=1" >
+    <title>Wear Unique</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;400;600&display=swap"
         rel="stylesheet">
-
 </head>
-
 <body>
     <header>
         <div class="logo">
@@ -39,23 +37,7 @@
         </div>
     </header>
 
-    <div class="homesection">
-    <h2 class="sectiontitle">{{category.name}}</h2>
-
-    <div class="bestrow">
-        {% for item in productlist %}
-        <a href="/product/{{ item.id }}" class="prodcard">
-            <img src="/static/{{ item.image }}" alt="{{ item.title}}">
-            <p class="cardtitle">{{ item.title }}</p>
-            <p class="cardprice">{{ item.price }} TK</p>
-        </a>
-        {% endfor %}
-        </div>
-    </div>
-
-    </div>
-
-    <footer>
+<footer>
         <div class="footerbox">
 
         <div class="col">

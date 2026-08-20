@@ -106,7 +106,7 @@ def run_tryon(person_bytes, chosenimg):
             return result_name, ""
         
     except httpx.ConnectError:
-        return "", "Try-on service is not running. Start virtual_try_on on port 8001"
+        return "", "Try-on service is not running. Start virtual_try_on on port 8005"
     except Exception as e:
         return "", f"Try-on failed: {e}"
 
@@ -133,3 +133,7 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
         f"&result={quote(result_name)}&tryerror={quote(error)}",
         status_code=303
     )
+    
+    @app.api_route("/contanct", methods = ["GET", "POST"])
+    async def contact(request: Request):
+        print(f"Contact")

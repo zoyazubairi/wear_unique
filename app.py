@@ -134,6 +134,6 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
         status_code=303
     )
     
-    @app.api_route("/contanct", methods = ["GET", "POST"])
-    async def contact(request: Request):
-        print(f"Contact")
+@app.get("/contact")
+async def contact(request: Request):
+    return templates.TemplateResponse(request, "contact.html", {})

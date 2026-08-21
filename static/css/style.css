@@ -461,3 +461,33 @@ footer {
 	color: #c9a66b;
 	margin: 0;
 }
+
+.contpage {
+	min-height: 700px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 50px 30px;
+	background: linear-gradient(180deg, #f7f4ef 0%, #ffffff 100%);
+}
+
+.contcard {
+	width: 100%;
+	max-width: 420px;
+	background: #ffffff;
+	border: 1px solid #e8e8e8;
+	padding: 40px 36px;
+}
+
+.contbrand {
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	color: #c9a66b;
+	font-size: 18px;
+	margin: 0 0 8px 0;
+}
+.contsub {
+	font-size: 14px;
+	color: #777;
+	margin: -3px 0 28px 0;
+}

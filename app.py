@@ -2,6 +2,9 @@ from fastapi import FastAPI, Request, Form, File, UploadFile
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.sessions import SessionMiddleware
+from dotenv import load_dotenv
+import os
 from datetime import date
 import mysql.connector
 import httpx
@@ -9,6 +12,11 @@ import uuid
 from urllib.parse import quote
 
 app = FastAPI()
+
+load_dotenv()
+secret_key = os.getenv("SECRET_KEY")
+
+app.add_middleware(SessionMiddleware, secret_key = secret_key)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
@@ -134,6 +142,21 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
         status_code=303
     )
     
-@app.get("/contact")
+@app.api_route("/contact", methods=["GET","POST"])
 async def contact(request: Request):
-    return templates.TemplateResponse(request, "contact.html", {})
+    
+    if request.method == "POST":
+        form = await request.form()
+        full_name = form.get("full_name")
+        email = form.get("email")
+        message = form.get("message")
+        
+        mycursor.execute(
+            "INSERT INTO contact (full_name, email, message) VALUES (%s, %s, %s)",
+            (full_name, email, message)
+        )
+        mydb.commit()
+        
+    return templates.TemplateResponse(request, "contact.html", {
+        "full_name": request.session.get("full_name"),
+    })

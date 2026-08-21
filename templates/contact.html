@@ -43,10 +43,17 @@
             <h2 class="title">Contact Us</h2>
             <p class="contsub">Send us a message</p>
 
-            <p class="label">Name</p>
-            <p class="label">E-mail</p>
-            <p class="label">Message</p>
-            <button class="buybtn" type="submit">Send</button>
+            <form method="post" action="/contact">
+                <p class="label">Name</p>
+                <input class="continput" type="text" name="full_name" value="{{ full_name or '' }}" required>
+
+                <p class="label">E-mail</p>
+                <input class="continput" type="email" name="email" placeholder="your@email.com" required>
+
+                <p class="label">Message</p>
+                <textarea class="continput" name="message" rows="4" placeholder="Your Message" required></textarea>
+
+                <button class="buybtn contbtn" type="submit">Send</button>
         </div>
     </div>
 

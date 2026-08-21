@@ -491,3 +491,34 @@ footer {
 	color: #777;
 	margin: -3px 0 28px 0;
 }
+
+.continput {
+	width: 100%;
+	padding: 14px 16px;
+	margin-bottom: 18px;
+	border: 1px solid #d4d4d4;
+	font-family: 'Poppins', Arial, sans-serif;
+	box-sizing: border-box;
+	background: #fafafa;
+}
+
+.continput:focus {
+	outline: none;
+	border-color: #c9a66b;
+	background: #ffffff;
+}
+
+textarea.continput {
+	height: 100px;
+	resize: vertical;
+}
+
+.contbtn {
+	width: 100%;
+	margin-top: 8px;
+	margin-right: 0;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	box-sizing: border-box;
+}

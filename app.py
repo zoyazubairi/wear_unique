@@ -24,6 +24,10 @@ templates = Jinja2Templates(directory="templates")
 mydb = mysql.connector.connect(host="127.0.0.1", user="root", password="", database="wear_unique")
 mycursor = mydb.cursor(dictionary=True)
 
+@app.get("/")
+async def hone_page(request:Request):
+    return templates.TemplateResponse(request, home.html, {})
+
 @app.get("/category/{id}")
 async def category_page(request: Request, id: str):
     mycursor.execute("SELECT * FROM categories WHERE id = %s", (id,))
@@ -145,6 +149,8 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
 @app.api_route("/contact", methods=["GET","POST"])
 async def contact(request: Request):
     
+    done = ""
+    
     if request.method == "POST":
         form = await request.form()
         full_name = form.get("full_name")
@@ -152,11 +158,13 @@ async def contact(request: Request):
         message = form.get("message")
         
         mycursor.execute(
-            "INSERT INTO contact (full_name, email, message) VALUES (%s, %s, %s)",
+            "INSERT INTO contacts (full_name, email, message) VALUES (%s, %s, %s)",
             (full_name, email, message)
         )
         mydb.commit()
+        done = "Message sent. We will reply soon."
         
     return templates.TemplateResponse(request, "contact.html", {
+        "done": done,
         "full_name": request.session.get("full_name"),
     })

@@ -43,6 +43,10 @@
             <h2 class="title">Contact Us</h2>
             <p class="contsub">Send us a message</p>
 
+            {% if done %}
+            <p class="contsub">{{ done }}</p>
+            <a href="/" class="buybtn contbtn">Back to Home</a>
+            {% else %}
             <form method="post" action="/contact">
                 <p class="label">Name</p>
                 <input class="continput" type="text" name="full_name" value="{{ full_name or '' }}" required>
@@ -54,6 +58,7 @@
                 <textarea class="continput" name="message" rows="4" placeholder="Your Message" required></textarea>
 
                 <button class="buybtn contbtn" type="submit">Send</button>
+            {% endif %}
         </div>
     </div>
 

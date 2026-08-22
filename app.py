@@ -178,7 +178,9 @@ async def checkout_page (request: Request, id: str):
         "product": product,
         "variant": variant,
         # "size": variants["size"],
+        "done": ""
     })
+    
 
 @app.api_route("/contact", methods=["GET","POST"])
 async def contact(request: Request):

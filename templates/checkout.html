@@ -38,12 +38,15 @@
     </header>
 
     <div class="contpage">
-        <div class="contcard checkoutcard">
+        <div class="contcard{% if not done %} checkoutcard {% endif %}">
             <p class="contbrand">Wear Unique</p>
             <h2 class="title">Checkout</h2>
             <div class="checkoutrow">
                 <div class="checkoutleft">
                     <form method="post" action="/checkout/{{ product.id }}">
+                        <input type="hidden" name="color" value="{{ variant.color }}">
+                        <input type="hidden" name="size" value="{{ variant.size }}">
+
                         <p class="label">Name</p>
                         <p>Sarah</p>
 
@@ -70,7 +73,7 @@
                             <p class="ordertitle">{{ product.title }}</p>
                             <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
                         </div>
-                        <p class="orderprice">{{ product.id }} Tk</p>
+                        <p class="orderprice">{{ product.price }} Tk</p>
                     </div>
                 </div>
             </div>

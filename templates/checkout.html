@@ -61,8 +61,16 @@
                 </div>
 
                 <div class="checkoutright">
-                    <div class="checkoutpic">
-                        <img src="/static/{{ variants.image }}" alt="{{product.title}}">
+                    <div class="orderitem">
+                        <div class="orderpic">
+                            <img src="/static/{{ variant.image }}" alt="{{product.title}}">
+                            <span class="qtydot">1</span>
+                        </div>
+                        <div class="orderinfo">
+                            <p class="ordertitle">{{ product.title }}</p>
+                            <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
+                        </div>
+                        <p class="orderprice">{{ product.id }} Tk</p>
                     </div>
                 </div>
             </div>

@@ -544,16 +544,58 @@ textarea.continput {
 	border-left: 1px solid #e8e0d4;
 }
 
-.checkoutpic {
+.orderitem {
+	display: flex;
+	align-item: center;
+	margin-bottom: 18px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid #eee;
+}
+
+.orderpic {
 	position: relative;
 	width: 72px;
 	margin-right: 14px;
 }
 
-.checkoutpic img {
+.orderpic img {
 	width: 72px;
 	height: 72p;
 	object-fit: cover;
 	border: 1px solid #ddd;
 	display: block;
+}
+
+.qtydot {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	width: 22px;
+	height: 22px;
+	background-color: #1e1e1e;
+	color: #ffffff;
+	border-radius: 50%;
+	text-align: center;
+	font-size: 12px;
+	line-height: 22px;
+}
+
+.orderinfo {
+	flex: 1;
+}
+
+.ordertitle {
+	margin: 0 0 6px 0;
+	font-size: 15px;
+}
+
+.ordercolor {
+	margin: 0;
+	font-size: 13px;
+	color: #777;
+}
+
+.orderprice {
+	margin: 0;
+	font-size: 15px;
 }

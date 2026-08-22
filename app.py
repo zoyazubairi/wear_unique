@@ -152,12 +152,32 @@ async def checkout_page (request: Request, id: str):
     mycursor.execute("SELECT * FROM products WHERE id = %s", (id,))
     product = mycursor.fetchone()
     
-    mycursor.execute("SELECT * FROM variants WHERE product_id = %s LIMIT 1", (id,))
-    variants = mycursor.fetchone()
+    if request.method == "POST":
+        form = await request.form()
+        color = form.get("color")
+        size = form.get("size")
+        
+    else: 
+        color = request.query_params.get("color")
+        size = request.query_params.get("size")
+        
+    if not color or not size:
+        return RedirectResponse("/product/" + id, status_code = 303)
+    
+    mycursor.execute("SELECT * FROM variants WHERE product_id = %s AND color = %s AND size = %s", 
+                     (id, color, size),)
+    variant = mycursor.fetchone()
+    if not variant:
+        return RedirectResponse("/product/" + id, status_code = 303)
+    
+    if request.method == "POST":
+        phone = form.get("phone")
+        address = form.get("address")
     
     return templates.TemplateResponse (request, "checkout.html", {
         "product": product,
-        "variants": variants
+        "variant": variant,
+        # "size": variants["size"],
     })
 
 @app.api_route("/contact", methods=["GET","POST"])

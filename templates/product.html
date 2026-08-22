@@ -25,7 +25,7 @@
         </div>
 
         <nav>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
             <a href="/category/1">Women</a>
             <a href="/category/2">Men</a>
             <a href="/contact">Contact</a>
@@ -57,27 +57,28 @@
             <p  class="price">{{product.price}} Tk.</p>
 
             <p class="label">Select Color</p>
+            <form method="get" action="/checkout/{{ product.id }}">
+                <div class="sizebox">
+                    {% for item in colorlist %}
+                    <label class="size">
+                        <input type="radio" name="color" value="{{ item.color }}" {% if chosenpic == item.image %}checked{% endif %} required>
+                        {{ item.color }}
+                    </label>
+                    {% endfor %}
+                </div>
 
-            <div class="sizebox">
-                {% for item in colorlist %}
-                <label class="size">
-                    <input type="radio" name="color" value="{{ item.color }}">
-                    {{ item.color }}
-                </label>
-                {% endfor %}
-            </div>
+                <p class="label">Select Size</p>
+                <div class="sizebox">
+                    {% for item in sizelist%}
+                    <label class="size">
+                        <input type="radio" name="size" value="{{ item.size }} required">
+                        {{ item.size}}
+                    </label> 
+                    {% endfor %}
+                </div>
 
-            <p class="label">Select Size</p>
-            <div class="sizebox">
-                {% for item in sizelist%}
-                <label class="size">
-                    <input type="radio" name="size" value="{{ item.size }}">
-                    {{ item.size}}
-                </label> 
-                {% endfor %}
-            </div>
-
-            <button class="buybtn" type="submit">Buy Now</button>
+                <button class="buybtn" type="submit">Buy Now</button>
+            </form>
 
             <p class="label">Product Details</p>
             <ul class="detailslist">
@@ -193,7 +194,6 @@
             <a href="/contact">Contact Us</a>
             <a href="#">Shipping</a>
             <a href="#">Returns</a>
-            <a href="#">FAQ</a>
         </div>
 
         <div class="col">

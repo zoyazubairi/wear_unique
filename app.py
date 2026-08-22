@@ -146,6 +146,20 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
         status_code=303
     )
     
+@app.api_route("/checkout/{id}", methods=["GET", "POST"])
+async def checkout_page (request: Request, id: str):
+    
+    mycursor.execute("SELECT * FROM products WHERE id = %s", (id,))
+    product = mycursor.fetchone()
+    
+    mycursor.execute("SELECT * FROM variants WHERE product_id = %s LIMIT 1", (id,))
+    variants = mycursor.fetchone()
+    
+    return templates.TemplateResponse (request, "checkout.html", {
+        "product": product,
+        "variants": variants
+    })
+
 @app.api_route("/contact", methods=["GET","POST"])
 async def contact(request: Request):
     

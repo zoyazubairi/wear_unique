@@ -522,3 +522,38 @@ textarea.continput {
 	text-decoration: none;
 	box-sizing: border-box;
 }
+
+.checkoutcard {
+	max-width: 980px;
+}
+
+.checkoutrow {
+	display: flex;
+}
+
+.checkoutleft {
+	width: 50%;
+	padding: 30px;
+	box-sizing: border-box;
+}
+
+.checkoutright {
+	width: 50%;
+	padding-left: 30px;
+	box-sizing: border-box;
+	border-left: 1px solid #e8e0d4;
+}
+
+.checkoutpic {
+	position: relative;
+	width: 72px;
+	margin-right: 14px;
+}
+
+.checkoutpic img {
+	width: 72px;
+	height: 72p;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	display: block;
+}

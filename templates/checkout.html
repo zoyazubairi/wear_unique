@@ -38,28 +38,34 @@
     </header>
 
     <div class="contpage">
-        <div class="contcard">
+        <div class="contcard checkoutcard">
             <p class="contbrand">Wear Unique</p>
-            <h2 class="title">Contact Us</h2>
-            <p class="contsub">Send us a message</p>
+            <h2 class="title">Checkout</h2>
+            <div class="checkoutrow">
+                <div class="checkoutleft">
+                    <form method="post" action="/checkout/{{ product.id }}">
+                        <p class="label">Name</p>
+                        <p>Sarah</p>
 
-            {% if done %}
-            <p class="contsub">{{ done }}</p>
-            <a href="/" class="buybtn contbtn">Back to Home</a>
-            {% else %}
-            <form method="post" action="/contact">
-                <p class="label">Name</p>
-                <input class="continput" type="text" name="full_name" value="{{ full_name or '' }}" required>
+                        <p class="label">Phone No.</p>
+                        <input class="continput" type="text" name="Phone" placeholder="Your Phone No." required>
 
-                <p class="label">E-mail</p>
-                <input class="continput" type="email" name="email" placeholder="your@email.com" required>
+                        <p class="label">Address</p>
+                        <textarea class="continput" name="Address" rows="4" placeholder="Your Address" required></textarea>
 
-                <p class="label">Message</p>
-                <textarea class="continput" name="message" rows="4" placeholder="Your Message" required></textarea>
+                        <p class="label">Payment</p>
+                        <p class="contsub">Cash On Delivery</p>
 
-                <button class="buybtn contbtn" type="submit">Send</button>
-            </form>
-            {% endif %}
+                        <button class="buybtn contbtn" type="submit">Place Order</button>
+                    </form>
+                </div>
+
+                <div class="checkoutright">
+                    <div class="checkoutpic">
+                        <img src="/static/{{ variants.image }}" alt="{{product.title}}">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

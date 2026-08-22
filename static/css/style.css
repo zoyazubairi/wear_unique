@@ -546,7 +546,7 @@ textarea.continput {
 
 .orderitem {
 	display: flex;
-	align-item: center;
+	align-items: center;
 	margin-bottom: 18px;
 	padding-bottom: 18px;
 	border-bottom: 1px solid #eee;

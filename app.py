@@ -177,7 +177,7 @@ async def checkout_page (request: Request, id: str):
     return templates.TemplateResponse (request, "checkout.html", {
         "product": product,
         "variant": variant,
-        # "size": variants["size"],
+        # "size": variant["size"],
         "done": ""
     })
     

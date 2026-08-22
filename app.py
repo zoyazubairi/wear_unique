@@ -47,7 +47,7 @@ async def category_page(request: Request, id: str):
     })
 
 @app.api_route("/product/{id}", methods=["GET", "POST"])
-async def product_page(request: Request, id: str):
+async def product(request: Request, id: str):
     
     chosenpic = request.query_params.get("chosen")
     uploadedpic = request.query_params.get("uploaded")
@@ -147,7 +147,7 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
     )
     
 @app.api_route("/checkout/{id}", methods=["GET", "POST"])
-async def checkout_page (request: Request, id: str):
+async def checkout(request: Request, id: str):
     
     mycursor.execute("SELECT * FROM products WHERE id = %s", (id,))
     product = mycursor.fetchone()
@@ -171,7 +171,7 @@ async def checkout_page (request: Request, id: str):
         return RedirectResponse("/product/" + id, status_code = 303)
     
     if request.method == "POST":
-        phone = form.get("phone")
+        phone = "+880" + form.get("phone")
         address = form.get("address")
     
     return templates.TemplateResponse (request, "checkout.html", {

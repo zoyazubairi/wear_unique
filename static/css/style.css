@@ -494,7 +494,7 @@ footer {
 
 .continput {
 	width: 100%;
-	padding: 14px 16px;
+	padding: 12px 16px 12px 9px;
 	margin-bottom: 18px;
 	border: 1px solid #d4d4d4;
 	font-family: 'Poppins', Arial, sans-serif;
@@ -535,6 +535,27 @@ textarea.continput {
 	width: 50%;
 	padding-right: 30px;
 	box-sizing: border-box;
+}
+
+.phonebox {
+	display: flex;
+	width: 100%;
+	margin-bottom: 18px;
+}
+
+.countrycode {
+	width: 82px;
+	height: 45.7px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #d4d4d4;
+	border-right: none;
+	background: #fafafa;
+	color: #333;
+	font-size: 13px;
+	box-sizing: border-box;
+	font-family: 'Poppins', Arial, sans-serif;
 }
 
 .checkoutright {

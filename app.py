@@ -170,17 +170,25 @@ async def checkout(request: Request, id: str):
     if not variant:
         return RedirectResponse("/product/" + id, status_code = 303)
     
+    quantity = 1
+    
     if request.method == "POST":
         phone = "+880" + form.get("phone")
         address = form.get("address")
+        quantity = int(form.get("quantity"))
     
     return templates.TemplateResponse (request, "checkout.html", {
         "product": product,
         "variant": variant,
         # "size": variant["size"],
+        "quantity": quantity,
         "done": ""
     })
     
+@app.get("/orders")
+async def orders(request: Request):
+
+    return templates.TemplateResponse(request, "orders.html", {})
 
 @app.api_route("/contact", methods=["GET","POST"])
 async def contact(request: Request):

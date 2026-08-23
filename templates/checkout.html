@@ -46,6 +46,7 @@
                     <form method="post" action="/checkout/{{ product.id }}">
                         <input type="hidden" name="color" value="{{ variant.color }}">
                         <input type="hidden" name="size" value="{{ variant.size }}">
+                        <input type="hidden" name="quantity" id="quantityinput" value="1">
 
                         <p class="label">Name</p>
                         <p>Sarah</p>
@@ -70,13 +71,34 @@
                     <div class="orderitem">
                         <div class="orderpic">
                             <img src="/static/{{ variant.image }}" alt="{{product.title}}">
-                            <span class="qtydot">1</span>
+                            <span class="qtydot" id="qtydot">{{ quantity | default(1) }}</span>
                         </div>
+
                         <div class="orderinfo">
-                            <p class="ordertitle">{{ product.title }}</p>
-                            <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
+                            <div class="producttop">
+                                    
+                                    <div class="productname">
+                                        
+                                        <p class="ordertitle">{{ product.title }}</p>
+                                        <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
+                                    </div>
+                            </div>
+
+                            <div class="orderQtyWrapper">
+                                <p class="orderprice">
+                                    <span id="totalprice">{{ product.price }}</span> Tk
+                                </p>
+
+                                <div class="quantitybox">
+                                    <div class="qtycontrol">
+                                            <button type="button" onclick="changeQty(-1)">−</button>
+                                            <input id="quantity" name="quantity" value="1" readonly>
+
+                                            <button type="button" onclick="changeQty(1)">+</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <p class="orderprice">{{ product.price }} Tk</p>
                     </div>
                 </div>
             </div>
@@ -122,6 +144,27 @@
             <p>&copy; 2026 Wear Unique. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+
+        let quantity = 1;
+
+        let price ={{ product.price }};
+
+        function changeQty(value){
+
+            quantity = quantity + value;
+
+            if(quantity < 1){
+                quantity = 1;
+            }
+
+            document.getElementById("quantity").value = quantity;
+            document.getElementById("quantityinput").value = quantity;
+            document.getElementById("qtydot").innerHTML = quantity;
+            document.getElementById("totalprice").innerHTML = price * quantity;
+        }
+    </script>
 
 </body>
 

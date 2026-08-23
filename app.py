@@ -188,7 +188,26 @@ async def checkout(request: Request, id: str):
 @app.get("/orders")
 async def orders(request: Request):
 
-    return templates.TemplateResponse(request, "orders.html", {})
+    mycursor.execute("SELECT * FROM orders")
+    orderlist = mycursor.fetchall()
+    
+    for item in orderlist:
+        mycurso.execute("SELECT * FROM variants WHERE id=%s", (item["variant_id"]))
+    
+        variant = mycursor.fetchone()
+    
+        item["color"] = variant["color"]
+        item["image"] = variant["image"]
+        item["size"] = variant["size"]
+        
+        product = mycursor.fetchone()
+        
+        item["title"] = product["title"]
+    
+    return templates.TemplateResponse(request, "orders.html", {
+        "orderlist": orderlist
+    })
+
 
 @app.api_route("/contact", methods=["GET","POST"])
 async def contact(request: Request):

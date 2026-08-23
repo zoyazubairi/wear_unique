@@ -680,3 +680,17 @@ textarea.continput {
     font-size: 15px;
     white-space: nowrap;
 }
+
+.accountleft {
+	width: 28%;
+	padding-right: 24px;
+	box-sizing: border-box;
+}
+
+.accountleft a {
+	display: block;
+	margin: 17px 0 14px 0;
+	color: #c9a66b;
+	text-decoration: none;
+	font-size: 14px;
+}

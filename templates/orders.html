@@ -38,10 +38,49 @@
     </header>
 
     <div class="contpage">
-        <div class="contcard{% if not done %} checkoutcard {% endif %}">
+        <div class="contcard checkoutcard">
             <p class="contbrand">Wear Unique</p>
             <h2 class="title">My Profile</h2>
             <div class="checkoutrow">
+                <div class="accountleft">
+                    <div class="accountnav">
+                        <a href="#">Profile</a>
+                        <a href="/orders">Orders</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </div>
+
+                <div class="accountright">
+                    <p class="label">Orders</p>
+
+                    {% if orderlist %}
+                    {% for item in orderlist %}
+                    <div class="orderitem">
+                        <div class="orderpic">
+                            <img src="/static/{{ variant.image }}" alt="{{product.title}}">
+                            <span class="qtydot" id="qtydot">{{ quantity }}</span>
+                        </div>
+                         <div class="orderinfo">
+                            <div class="producttop">
+                                <div class="productname">
+                                    <p class="ordertitle">{{ product.title }}</p>
+                                    <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
+                                    <p class="ordercolor">{{ product.price }}</p>
+                                </div>
+                            </div>
+
+                            <div class="orderQtyWrapper">
+                                <p class="orderprice">
+                                    <span id="totalprice">{{ product.price }}</span> Tk
+                                </p>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <p class="contsub">No Orders Yet.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

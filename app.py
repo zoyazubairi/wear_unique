@@ -26,7 +26,7 @@ mycursor = mydb.cursor(dictionary=True)
 
 @app.get("/")
 async def hone_page(request:Request):
-    return templates.TemplateResponse(request, home.html, {})
+    return templates.TemplateResponse(request, "home.html", {})
 
 @app.get("/category/{id}")
 async def category_page(request: Request, id: str):
@@ -192,13 +192,15 @@ async def orders(request: Request):
     orderlist = mycursor.fetchall()
     
     for item in orderlist:
-        mycurso.execute("SELECT * FROM variants WHERE id=%s", (item["variant_id"]))
+        mycursor.execute("SELECT * FROM variants WHERE id=%s", (item["variant_id"]))
     
         variant = mycursor.fetchone()
     
         item["color"] = variant["color"]
         item["image"] = variant["image"]
         item["size"] = variant["size"]
+        
+        mycursor.execute("SELECT * FROM products WHERE id=%s", (variant["product_id"],))
         
         product = mycursor.fetchone()
         

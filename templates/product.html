@@ -77,6 +77,8 @@
                     {% endfor %}
                 </div>
 
+                <a href="sizeadvisor" class="sizehelp-link">Not sure which size? Get a recommendation</a>
+
                 <button class="buybtn" type="submit">Buy Now</button>
             </form>
 
@@ -108,6 +110,31 @@
 
     </div>
     
+    <section class="sizeadvisor" id="sizeadvisor">
+        <div class="sizeadvisor-inner">
+            <div class="sizeadvisor-header">
+                <span class="sizeadvisor-icon">
+                    <img src="/static/images/magic.svg" alt="">
+                </span>
+                <div>
+                    <p class="sizeadvisor-kicker">AI Size Advisor</p>
+                    <h3 class="sizeadvisor-title">Find Your Perfect Fit</h3>
+                    <p class="sizeadvisor-sub">Share your measurements and we'll match you to the right size for this piece.</p>
+                </div>
+            </div>
+
+            <form method="post" action="/size-advisor/{{ product.id }}#sizeadvisor" class="szieadvisor-form">
+                <div class="sizeadvisor-field">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+            </div>
+                
     {% if showupload %}
     <div class="uploadbox" id="tryon">
         <p class="label">Try It On</p>

@@ -251,6 +251,133 @@ nav a:hover {
 	margin: 0;
 }
 
+:root {
+	--sa-bg: #faf7f2;
+	--sa-panel: #ffffff;
+	--sa-border: #e7ded0;
+	--sa-accent: #b08d57;
+	--sa-accent-dark: #8c6f42;
+	--sa-text: #2b2925;
+	--sa-muted: #8a8377;
+	--sa-error: #a6634a;
+}
+
+.sizeadvisor {
+	background: var(--sa-bg);
+	adding: 70px 24px;
+	border-top: 1px solid var(--sa-border);
+	border-bottom: 1px solid var(--sa-border);
+}
+
+.sizehelp-link {
+	display: inline-block;
+	margin: 6px 0 18px;
+	font-family: 'Poppins', sans-serif;
+	font-size: 13px;
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.sizehelp-link:hover {
+	color: var(--sa-accent)
+}
+
+.sizeadvisor-inner {
+	max-width: 760px;
+	margin: 0 auto;
+	background: var(--sa-panel);
+	border: 1px solid var(--sa-border);
+	border-radius: 6px;
+	padding: 48px 56px;
+	box-shadow: 0 20px 45px rgba(43, 41, 37, 0.06;)
+}
+
+.sizeadvisor-icon {
+	flex-shrik: 0;
+	width: 46px;
+	height: 46px;
+	border-radius: 50%;
+	background: liner-gradient(135deg, #f3e9d8, #ffffff);
+	border: 1px solid var(--sa-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sizeadvisor-icon img {
+	width: 22px;
+	height: 22px;
+	opacity: 0.05;
+}
+
+.sizeadvisor-kicker {
+	font-family: 'Poppins', sans-serif;
+	font-size: 11px;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--sa-accent-dark)
+	margin: 0 0 6px;
+}
+
+.sizeadvisor-title {
+	font-family: 'Payfair Display', serif;
+	font-style: italic;
+	font-weight: 400;
+	font-size: 28px;
+	color: var(--sa-text);
+	margin: 0 0 8px;
+}
+
+.sizeadvisor-sub {
+	font-family: 'Poppins', sans-serif;
+	font-weight: 300;
+	font-size: 14px;
+	line-height: 1.6;
+	color: var(--sa-muted);
+	margin: 0;
+}
+
+.sizeadvisor-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.sizeadvisor-field label {
+	font-family: 'Poppins', sans-serif;
+	font-size: 12px;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--sa-muted)
+}
+
+.sizeadvisor-field input,
+.sizeadvisor-field select {
+	font-family: 'Poppins', sans-serif;
+	font-size: 15px;
+	color: var(--sa-text);
+	background: transparent;
+	border: none;
+	border-bottom: 1px solid var(--sa-boder);
+	padding: 8px 2px;
+	outline: none;
+	transition: border-color 0.25s ease;
+	appearance: none;
+	-webkit-appearance: none;
+}
+
+.sizeadvisor-field select {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%238a8377'/%3E%3C/svg%3E");
+	background-repeat: no-repeat;
+	background-position: right 2px center;
+	padding-right: 16px;
+}
+
+.sizeadvisor-field input:focus, 
+.sizeadvisor-field select:focus {
+	border-bottom-color: var(--sa-accent);
+}
+
 .uploadbox {
 	max-width: 1300px;
 	margin: 0 auto;

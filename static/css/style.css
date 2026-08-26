@@ -111,7 +111,6 @@ nav a:hover {
 	margin: 0 auto;
 	padding: 70px 30px;
 	animation: fadeInUp 0.6s ease both;
-
 }
 
 .gallery {
@@ -702,6 +701,7 @@ footer {
 	font-style: italic;
 	font-size: 28px;
 	margin-bottom: 30px;
+	animation: fadeInUp 0.5s ease both;
 }
 
 .bestrow {
@@ -715,7 +715,17 @@ footer {
 	margin-bottom: 30px;
 	text-decoration: none;
 	color: #333;
+	animation: fadeInUp 0.5s ease both;
 }
+
+.prodcard:nth-child(1) { animation-delay: 0.05s; }
+.prodcard:nth-child(2) { animation-delay: 0.10s; }
+.prodcard:nth-child(3) { animation-delay: 0.15s; }
+.prodcard:nth-child(4) { animation-delay: 0.20s; }
+.prodcard:nth-child(5) { animation-delay: 0.25s; }
+.prodcard:nth-child(6) { animation-delay: 0.30s; }
+.prodcard:nth-child(7) { animation-delay: 0.35s; }
+.prodcard:nth-child(8) { animation-delay: 0.40s; }
 
 .prodcard img {
 	width: 100%;

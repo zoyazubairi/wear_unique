@@ -10,6 +10,7 @@ import mysql.connector
 import httpx
 import uuid
 from urllib.parse import quote
+from size_advisor import get_size_recommendation
 
 app = FastAPI()
 
@@ -53,6 +54,9 @@ async def product(request: Request, id: str):
     uploadedpic = request.query_params.get("uploaded")
     resultpic = request.query_params.get("result")
     tryerror = request.query_params.get("tryerror")
+    recsize = request.query_params.get("recsize")
+    recreason = request.query_params.get("recreason")
+    
     showupload = False
     
     if request.method == "POST":
@@ -84,8 +88,42 @@ async def product(request: Request, id: str):
         "uploadedpic": uploadedpic,
         "showupload": showupload,
         "resultpic": resultpic,
-        "tryerror": tryerror
+        "tryerror": tryerror,
+        "recsize": recsize,
+        "recreason": recreason
         })
+    
+@app.post("/size-advisor/{id}")
+async def size_advisor(request: Request, id: str):
+
+    form = await request.form()
+    
+    gender = form.get("gender", "")
+    height = form.get("height", "")
+    weight = form.get("weight", "")
+    bust = form.get("bust", "")
+    waist = form.get("waist", "")
+    hip = form.get("hip", "")
+    
+    mycursor.execute("SELECT * FROM products WHERE id =%s", (id,))
+    
+    product = mycursor.fetchone()
+    
+    recsize, recreason = get_size_recommendation(
+        gender,
+        height,
+        weight,
+        bust,
+        waist,
+        hip,
+        product["category_id"]
+    )
+    
+    return RedirectResponse(
+        f"/product/{id}?recsize={quote(recsize)}"
+        f"&recreason={quote(recreason)}#sizeadvisor",
+        status_code=303
+    )
 
 TRYON_URL = "http://127.0.0.1:8005/tryon/"
 TRYON_TIMEOUT = 300

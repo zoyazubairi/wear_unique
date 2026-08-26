@@ -46,7 +46,7 @@
                 <img src="/static/{{ galleryimage.image }}" alt="{{ galleryimage.color }}">
                 <form method="post" action="/product/{{ product.id }}#tryon">
                     <input type="hidden" name="chosenimg" value="{{ galleryimage.image}}">
-                    <button class="trybtn" type="submit">Try Now</button>
+                    <button class="trybtn" type="submit">TRY NOW</button>
                 </form>
             </div>
             {% endfor %}
@@ -71,18 +71,18 @@
                 <div class="sizebox">
                     {% for item in sizelist%}
                     <label class="size">
-                        <input type="radio" name="size" value="{{ item.size }}" required>
+                        <input type="radio" name="size" value="{{ item.size }}" {% if recsize == item.size %}checked{% endif %} required>
                         {{ item.size}}
                     </label> 
                     {% endfor %}
                 </div>
 
-                <a href="sizeadvisor" class="sizehelp-link">Not sure which size? Get a recommendation</a>
+                <a href="#sizeadvisor" class="sizehelp-link">Not sure which size? Get a recommendation</a>
 
                 <button class="buybtn" type="submit">Buy Now</button>
             </form>
 
-            <p class="label">Product Details</p>
+            <p class="labelpro">Product Details</p>
             <ul class="detailslist">
                 <li>{{ product.description }}</li>
                 <li>Care: Machine wash cold</li>
@@ -109,35 +109,10 @@
         </div>
 
     </div>
-    
-    <section class="sizeadvisor" id="sizeadvisor">
-        <div class="sizeadvisor-inner">
-            <div class="sizeadvisor-header">
-                <span class="sizeadvisor-icon">
-                    <img src="/static/images/magic.svg" alt="">
-                </span>
-                <div>
-                    <p class="sizeadvisor-kicker">AI Size Advisor</p>
-                    <h3 class="sizeadvisor-title">Find Your Perfect Fit</h3>
-                    <p class="sizeadvisor-sub">Share your measurements and we'll match you to the right size for this piece.</p>
-                </div>
-            </div>
-
-            <form method="post" action="/size-advisor/{{ product.id }}#sizeadvisor" class="szieadvisor-form">
-                <div class="sizeadvisor-field">
-                    <label for="gender">Gender</label>
-                    <select id="gender" name="gender" required>
-                        <option value="">Select</option>
-                        <option value="Female">Female</option>
-                        <option value="Male">Male</option>
-                        <option value="Prefer not to say">Prefer not to say</option>
-                    </select>
-                </div>
-            </div>
                 
     {% if showupload %}
     <div class="uploadbox" id="tryon">
-        <p class="label">Try It On</p>
+        <p class="tryon-title">Try It On</p>
 
         <div class="tryonrow">
             
@@ -194,6 +169,79 @@
         </div>
     </div>
     {% endif %}
+
+    <section class="sizeadvisor" id="sizeadvisor">
+        <div class="sizeadvisor-inner">
+            <div class="sizeadvisor-head">
+                <div class="sizeadvisor-icon">
+                    <img src="/static/images/magic.svg" alt="">
+                </div>
+                <div class="sizeadvisor-heading">
+                    <p class="sizeadvisor-kicker">SIZE ADVISOR</p>
+                    <h2 class="sizeadvisor-title">Find Your Perfect Fit</h2>
+                    <p class="sizeadvisor-sub">Share your measurements and we'll match you to the right size for this piece.</p>
+                </div>
+            </div>
+
+            <form method="post" action="/size-advisor/{{ product.id }}#sizeadvisor" class="sizeadvisor-form"
+            onsubmit="const b=this.querySelector('.sizeadvisor-btn'); 
+            b.classList.add('is-loading'); b.disabled=true;
+            b.querySelector('.sizeadvisor-btntext').textContent='Finding your size...';">
+                <div class="sizeadvisor-field">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender" required>
+                        <option value="">Select</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+
+                <div class="sizeadvisor-field">
+                    <label for="bust">Bust / Chest (cm)</label>
+                    <input type="number" id="bust" name="bust" min="50" max="200" required>
+                </div>
+
+                <div class="sizeadvisor-field">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" name="height" min="100" max="250" required>
+                </div>
+
+                <div class="sizeadvisor-field">
+                    <label for="waist">Waist (cm)</label>
+                    <input type="number" id="waist" name="waist" min="40" max="200" required>
+                </div>
+                
+                <div class="sizeadvisor-field">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" name="weight" min="20" max="250" required>
+                </div>
+
+                <div class="sizeadvisor-field">
+                    <label for="hip">Hip (cm)</label>
+                    <input type="number" id="hip" name="hip" min="50" max="200" required>
+                </div>
+
+                <button class="sizeadvisor-btn" type="submit">
+                    <span class="sizeadvisor-spinner"></span>
+                    <span class="sizeadvisor-btntext">Get My Size</span>
+                </button>
+            </form>
+
+            {% if recsize %}
+            <div class="sizeadvisor-result">
+                    <p class="sizeadvisor-resultlabel">Recommend Size</p>
+                    <p class="sizeadvisor-size">{{ recsize }}</p>
+                    <p class="sizeadvisor-reason">{{ recreason }}</p>
+            </div>
+            {% elif recreason %}
+            <div class="sizeadvisor-result sizeadvisor-result-empty">
+                <p class="sizeadvisor-reason">{{ recreason }}</p>
+            </div>
+            {% endif %}
+
+        </div>
+    </section>
 
     <footer>
         <div class="footerbox">

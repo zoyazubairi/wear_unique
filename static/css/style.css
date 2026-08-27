@@ -94,6 +94,10 @@ header {
 	letter-spacing: 4px;
 }
 
+.logo:hover {
+	transform: scale(1.06);
+}
+
 nav {
 	display: flex;
 	flex-wrap: wrap;

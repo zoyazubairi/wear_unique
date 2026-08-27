@@ -9,6 +9,40 @@ html {
 	scroll-margin-top: 160px;
 }
 
+.announcebar {
+	background-color: #1e1e1e;
+	overflow: hidden;
+	white-space: nowrap;
+	padding: 9px 0 0;
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.announcebar-track {
+	display: inline-flex;
+	animation: movement 22s linear infinite;
+}
+
+.announcebar:hover .announcebar-track {
+	animation-play-state: paused;
+}
+
+.announce-item {
+	color: #ffffff;
+	font-size: 12px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	padding: 0 210px;
+}
+
+.announce-dot {
+	color: #777;
+}
+
+@keyframes movement {
+	from { transform: translateX(-50%); }
+	to { transform: translateX(0); }
+}
+
 body{
 	margin: 0;
 	font-family: 'Poppins', Arial, sans-serif;
@@ -78,6 +112,7 @@ nav a {
 nav a:hover {
 	color: #c9a66b;
 	border-bottom: 2px solid #c9a66b;
+	transform: scale(1.06);
 }
 
 .icons {
@@ -242,6 +277,7 @@ nav a:hover {
 .size:hover {
 	background-color: #1e1e1e;
 	color: #ffffff;
+	transform: scale(1.06);
 }
 
 .buybtn {
@@ -258,6 +294,7 @@ nav a:hover {
 
 .buybtn:hover {
 	background-color: #c9a66b;
+	transform: scale(1.1o);
 }
 
 .detailslist {
@@ -701,7 +738,7 @@ footer {
 	font-style: italic;
 	font-size: 28px;
 	margin-bottom: 30px;
-	animation: fadeInUp 0.5s ease both;
+	animation: fadeInUp 0.30s ease both;
 }
 
 .bestrow {

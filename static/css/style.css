@@ -1020,3 +1020,186 @@ textarea.continput {
 	text-decoration: none;
 	font-size: 14px;
 }
+
+/** Home page sections **/
+
+.hero {
+	height: 680px;
+	background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url(/static/images/hero.jpg);
+	background-size: cover;
+	background-position: center;
+	display: flex;
+	align-items: center;
+	padding: 0 60px;
+}
+
+.herosmall {
+	color: #c9a66b;
+	letter-spacing: 3px;
+	font-size: 13px;
+	margin-bottom: 10px;
+}
+
+.herotitle {
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	color: #ffffff;
+	font-size: 52px;
+	margin: 0 0 12px 0;
+}
+
+.herosub {
+	color: #f2f2f2;
+	font-size: 16px;
+	margin-bottom: 24px;
+}
+
+.herobtn {
+	display: inline-block;
+	text-decoration: none;
+}
+
+.homesection {
+	max-width: 1300px;
+	margin: 0 auto;
+	padding: 50px 30px;
+}
+
+.sectiontitle {
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	font-size: 28px;
+	margin-bottom: 30px;
+}
+
+.bestrow {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.featrow {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.featcard {
+	width: 50%;
+	margin: 0;
+	position: relative;
+	display: block;
+	text-decoration: none;
+}
+
+.featcard img {
+	width: 100%;
+	height: 520px;
+	object-fit: cover;
+	display: block;
+}
+
+.featname {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 24px;
+	text-align: center;
+	color: #ffffff;
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	font-size: 22px;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+/** Lohgn / signup page **/
+
+.authbox {
+	max-width: 420px;
+	margin: 60px auto;
+	padding: 0 30px;
+}
+
+.authpage {
+	min-height: 70vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 50px 30px;
+	background: linear-gradient(180deg, #f7f4ef 0%, #ffffff 100%);
+}
+
+.authcard {
+	width: 100%;
+	max-width: 420px;
+	background: #ffffff;
+	border: 1px solid #e8e0d4;
+	padding: 40px 36px;
+}
+
+.authbrand {
+	font-family: 'Playfair Display', serif;
+	font-style: italic;
+	color: #c9a66b;
+	font-size: 18px;
+	margin: 0 0 8px 0;
+}
+
+.authsub {
+	font-size: 14px;
+	color: #777;
+	margin: -10px 0 28px 0;
+}
+
+.authinput {
+	width: 100%;
+	padding: 14px 16px;
+	margin-bottom: 18px;
+	border: 1px solid #d4d4d4;
+	font-family: 'Poppins', Arial, sans-serif;
+	font-size: 14px;
+	box-sizing: border-box;
+	background: #fafafa;
+}
+
+.authinput:focus {
+	outline: none;
+	border-color: #c9a66b;
+	background: #ffffff;
+}
+.username {
+	color: #c9a66b;
+	font-size: 13px;
+	margin-right: 12px;
+	align-self: center;
+}
+
+/** Account page **/
+
+.accountnav {
+	margin: 0;
+}
+
+.accountnav a {
+	display: block;
+	margin: 0 0 14px 0;
+	color: #c9a66b;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.accountleft {
+	width: 28%;
+	padding-right: 24px;
+	box-sizing: border-box;
+}
+
+.accountright {
+	width: 72%;
+	padding-left: 30px;
+	box-sizing: border-box;
+	border-left: 1px solid #e8e0d4;
+}
+
+.accountcard {
+	max-width: unset;
+}

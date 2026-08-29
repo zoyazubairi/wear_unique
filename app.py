@@ -26,8 +26,22 @@ mydb = mysql.connector.connect(host="127.0.0.1", user="root", password="", datab
 mycursor = mydb.cursor(dictionary=True)
 
 @app.get("/")
-async def hone_page(request:Request):
-    return templates.TemplateResponse(request, "home.html", {})
+async def home(request: Request):
+    mycursor.execute("SELECT * FROM products WHERE bestseller = 1 LIMIT 4")
+    bestlist = mycursor.fetchall()
+    for item in bestlist:
+        mycursor.execute("SELECT image FROM variants WHERE product_id = %s LIMIT 1", (item["id"],))
+        first = mycursor.fetchone()
+        item["image"] = first["image"]
+
+    mycursor.execute("SELECT * FROM categories LIMIT 4")
+    catlist = mycursor.fetchall()
+
+    return templates.TemplateResponse(request, "home.html", {
+        "bestlist": bestlist,
+        "catlist": catlist,
+        "full_name": request.session.get("full_name"),
+    })
 
 @app.get("/category/{id}")
 async def category_page(request: Request, id: str):
@@ -271,3 +285,90 @@ async def contact(request: Request):
         "done": done,
         "full_name": request.session.get("full_name"),
     })
+
+
+@app.api_route("/signup", methods=["GET", "POST"])
+async def signup(request: Request):
+    error = ""
+    if request.method == "POST":
+        form = await request.form()
+        full_name = form.get("full_name")
+        email = form.get("email")
+        email = email.strip()
+        password = form.get("password")
+
+        mycursor.execute("SELECT * FROM customers WHERE email = %s", (email,))
+        if mycursor.fetchone():
+            error = "Email already used"
+        else:
+            mycursor.execute(
+                "INSERT INTO customers (full_name, email, password) VALUES (%s, %s, %s)",
+                (full_name, email, password),
+            )
+            mydb.commit()
+            return RedirectResponse("/login", status_code=303)
+
+    return templates.TemplateResponse(request, "signup.html", {
+        "error": error,
+        "full_name": request.session.get("full_name"),
+    })
+
+
+@app.api_route("/login", methods=["GET", "POST"])
+async def login(request: Request):
+    error = ""
+    if request.method == "POST":
+        form = await request.form()
+        email = form.get("email")
+        password = form.get("password")
+
+        mycursor.execute(
+            "SELECT * FROM customers WHERE email = %s AND password = %s",
+            (email, password),
+        )
+        user = mycursor.fetchone()
+        if user:
+            request.session["user_id"] = user["id"]
+            request.session["full_name"] = user["full_name"]
+            return RedirectResponse("/", status_code=303)
+        else:
+            error = "Wrong email or password"
+
+    return templates.TemplateResponse(request, "login.html", {
+        "error": error,
+        "full_name": request.session.get("full_name"),
+    })
+
+
+@app.get("/logout")
+async def logout(request: Request):
+    request.session.clear()
+    return RedirectResponse("/login", status_code=303)
+
+
+@app.api_route("/account", methods=["GET", "POST"])
+async def account(request: Request):
+    if not request.session.get("user_id"):
+        return RedirectResponse("/login", status_code=303)
+
+    done = ""
+    if request.method == "POST":
+        form = await request.form()
+        full_name = form.get("full_name")
+        mycursor.execute(
+            "UPDATE customers SET full_name = %s WHERE id = %s",
+            (full_name, request.session.get("user_id")),
+        )
+        mydb.commit()
+        request.session["full_name"] = full_name
+        done = "Name updated"
+
+    mycursor.execute("SELECT * FROM customers WHERE id = %s", (request.session.get("user_id"),))
+    user = mycursor.fetchone()
+
+    return templates.TemplateResponse(request, "account.html", {
+        "done": done,
+        "full_name": request.session.get("full_name"),
+        "email": user["email"],
+    })
+

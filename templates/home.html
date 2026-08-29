@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" >
+        <title>Wear Unique</title>
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="announcebar">
+        <div class="announcebar-track">
+            <span class="announce-item">CERTIFIED QUALITY</span>
+            <span class="announce-dot">&bull;</span>
+            <span class="announce-item">FREE SHIPPING</span>
+            <span class="announce-dot">&bull;</span>
+            <span class="announce-item">EASY RETURNS</span>
+            <span class="announce-dot">&bull;</span>
+
+            <span class="announce-item">CERTIFIED QUALITY</span>
+            <span class="announce-dot">&bull;</span>
+            <span class="announce-item">FREE SHIPPING</span>
+            <span class="announce-dot">&bull;</span>
+            <span class="announce-item">EASY RETURNS</span>
+            <span class="announce-dot">&bull;</span>
+        </div>
+    </div>
+    
+    <header>
+        <div class="logo">
+            <a href="/" class="logolink">
+                <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="40" height="40">
+                <div class="logotext">
+                    <span class="logo1">Wear</span>
+                    <span class="logo2">Unique</span>
+                </div>
+            </a>
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/category/1">Women</a>
+            <a href="/category/2">Men</a>
+            <a href="/contact">Contact</a>
+        </nav>
+
+        <div class="icons quicklinks">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href="/account" class="iconbox" title="Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
+                <img src="/static/images/account.svg" alt="account" width="22" height="22">
+            </a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="herotext">
+            <p class="herosmall">New Season</p>
+            <h1 class="herotitle">Wear Unique</h1>
+            <p class="herosub">Trendy and affordable clothing for everyone.</p>
+            <a href="/category/1" class="buybtn herobtn">Shop Now</a>
+        </div>
+    </div>
+
+    <div class="homesection">
+        <h2 class="sectiontitle">Best Selling</h2>
+        <div class="bestrow">
+            {% for product in bestlist %}
+            <a class="prodcard" href="/product/{{ product.id }}">
+                <img src="/static/{{ product.image }}" alt="{{ product.title }}">
+                <p class="cardtitle">{{ product.title }}</p>
+                <p class="cardprice">{{ product.price }} TK</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="homesection">
+        <h2 class="sectiontitle">Featured Collections</h2>
+        <div class="featrow">
+            {% for cat in catlist %}
+            <a class="featcard" href="/category/{{ cat.id }}">
+                <img src="/static/{{ cat.image }}" alt="{{ cat.name }}">
+                <span class="featname">{{ cat.name }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerbox">
+
+        <div class="col">
+            <a href="/" class="logolink">
+                <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="34" height="34">
+                <div class="logotext">
+                    <span class="logo1">Wear</span>
+                    <span class="logo2">Unique</span>
+                </div>
+            </a>
+
+            <p>Trendy and affordable clothing for everyone.</p>
+        </div>
+
+        <div class="col">
+            <h3>Shop</h3>
+            <a href="/category/1">Women</a>
+            <a href="/category/2">Men</a>
+        </div>
+
+        <div class="col">
+            <h3>Help</h3>
+            <a href="/contact">Contact Us</a>
+            <a href="#">Shipping</a>
+            <a href="#">Returns</a>
+        </div>
+
+        <div class="col">
+            <h3>Follow Us</h3>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Pinterest</a>
+        </div>
+    </div>
+
+        <div class="bottomtext">
+            <p>&copy; 2026 Wear Unique. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

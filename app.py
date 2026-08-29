@@ -285,3 +285,63 @@ async def contact(request: Request):
         "done": done,
         "full_name": request.session.get("full_name"),
     })
+
+
+@app.api_route("/signup", methods=["GET", "POST"])
+async def signup(request: Request):
+    error = ""
+    if request.method == "POST":
+        form = await request.form()
+        full_name = form.get("full_name")
+        email = form.get("email")
+        email = email.strip()
+        password = form.get("password")
+
+        mycursor.execute("SELECT * FROM customers WHERE email = %s", (email,))
+        if mycursor.fetchone():
+            error = "Email already used"
+        else:
+            mycursor.execute(
+                "INSERT INTO customers (full_name, email, password) VALUES (%s, %s, %s)",
+                (full_name, email, password),
+            )
+            mydb.commit()
+            return RedirectResponse("/login", status_code=303)
+
+    return templates.TemplateResponse(request, "signup.html", {
+        "error": error,
+        "full_name": request.session.get("full_name"),
+    })
+
+
+@app.api_route("/login", methods=["GET", "POST"])
+async def login(request: Request):
+    error = ""
+    if request.method == "POST":
+        form = await request.form()
+        email = form.get("email")
+        password = form.get("password")
+
+        mycursor.execute(
+            "SELECT * FROM customers WHERE email = %s AND password = %s",
+            (email, password),
+        )
+        user = mycursor.fetchone()
+        if user:
+            request.session["user_id"] = user["id"]
+            request.session["full_name"] = user["full_name"]
+            return RedirectResponse("/", status_code=303)
+        else:
+            error = "Wrong email or password"
+
+    return templates.TemplateResponse(request, "login.html", {
+        "error": error,
+        "full_name": request.session.get("full_name"),
+    })
+
+
+@app.get("/logout")
+async def logout(request: Request):
+    request.session.clear()
+    return RedirectResponse("/login", status_code=303)
+

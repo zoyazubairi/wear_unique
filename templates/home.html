@@ -50,8 +50,13 @@
             <a href="/contact">Contact</a>
         </nav>
 
-        <div class="icons">
-            <a href="#" class="iconbox">
+        <div class="icons quicklinks">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href="/account" class="iconbox" title="Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
                 <img src="/static/images/account.svg" alt="account" width="22" height="22">
             </a>
         </div>

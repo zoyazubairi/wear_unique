@@ -26,8 +26,22 @@ mydb = mysql.connector.connect(host="127.0.0.1", user="root", password="", datab
 mycursor = mydb.cursor(dictionary=True)
 
 @app.get("/")
-async def hone_page(request:Request):
-    return templates.TemplateResponse(request, "home.html", {})
+async def home(request: Request):
+    mycursor.execute("SELECT * FROM products WHERE bestseller = 1 LIMIT 4")
+    bestlist = mycursor.fetchall()
+    for item in bestlist:
+        mycursor.execute("SELECT image FROM variants WHERE product_id = %s LIMIT 1", (item["id"],))
+        first = mycursor.fetchone()
+        item["image"] = first["image"]
+
+    mycursor.execute("SELECT * FROM categories LIMIT 4")
+    catlist = mycursor.fetchall()
+
+    return templates.TemplateResponse(request, "home.html", {
+        "bestlist": bestlist,
+        "catlist": catlist,
+        "full_name": request.session.get("full_name"),
+    })
 
 @app.get("/category/{id}")
 async def category_page(request: Request, id: str):

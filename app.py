@@ -345,3 +345,30 @@ async def logout(request: Request):
     request.session.clear()
     return RedirectResponse("/login", status_code=303)
 
+
+@app.api_route("/account", methods=["GET", "POST"])
+async def account(request: Request):
+    if not request.session.get("user_id"):
+        return RedirectResponse("/login", status_code=303)
+
+    done = ""
+    if request.method == "POST":
+        form = await request.form()
+        full_name = form.get("full_name")
+        mycursor.execute(
+            "UPDATE customers SET full_name = %s WHERE id = %s",
+            (full_name, request.session.get("user_id")),
+        )
+        mydb.commit()
+        request.session["full_name"] = full_name
+        done = "Name updated"
+
+    mycursor.execute("SELECT * FROM customers WHERE id = %s", (request.session.get("user_id"),))
+    user = mycursor.fetchone()
+
+    return templates.TemplateResponse(request, "account.html", {
+        "done": done,
+        "full_name": request.session.get("full_name"),
+        "email": user["email"],
+    })
+

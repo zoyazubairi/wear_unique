@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Account - Wreak Fashion</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="/" class="logolink">
+                <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="40" height="40">
+                <div class="logotext">
+                    <span class="logo1">Wreak</span>
+                    <span class="logo2">FASHION</span>
+                </div>
+            </a>
+        </div>
+
+        <nav>
+            <a href="/">Home</a>
+            <a href="/category/1">Women</a>
+            <a href="/category/2">Men</a>
+            <a href="/contact">Contact</a>
+        </nav>
+
+        <div class="icons quicklinks">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href="/account" class="iconbox" title="Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
+                <img src="/static/images/account.svg" alt="account" width="22" height="22">
+            </a>
+        </div>
+    </header>
+
+    <div class="authpage">
+        <div class="authcard accountcard">
+            <p class="authbrand">Wreak Fashion</p>
+            <h2 class="title">My Account</h2>
+            <div class="checkoutrow">
+                <div class="accountleft">
+                    <p class="accountnav">
+                        <a href="/account">Profile</a>
+                        <a href="/orders">Orders</a>
+                        <a href="/logout">Logout</a>
+                    </p>
+                </div>
+                <div class="accountright">
+                    {% if done %}
+                    <p class="authsub">{{ done }}</p>
+                    {% endif %}
+                    <p class="label">Profile</p>
+                    <form method="post" action="/account">
+                        <p class="label">Name</p>
+                        <input class="authinput" type="text" name="full_name" value="{{ full_name }}" required>
+                        <p class="label">Email</p>
+                        <input class="authinput" type="email" value="{{ email }}" readonly>
+                        <button class="buybtn authbtn" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footerbox">
+            <div class="col">
+                <div class="logo">
+                    <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="34" height="34">
+                    <div class="logotext">
+                        <span class="logo1">Wreak</span>
+                        <span class="logo2">FASHION</span>
+                    </div>
+                </div>
+                <p>Trendy and affordable clothing for everyone.</p>
+            </div>
+
+            <div class="col">
+                <h3>Shop</h3>
+                <a href="/category/1">Women</a>
+                <a href="/category/2">Men</a>
+            </div>
+
+            <div class="col">
+                <h3>Help</h3>
+                <a href="/contact">Contact Us</a>
+                <a href="#">Shipping</a>
+                <a href="#">Returns</a>
+                <a href="#">FAQ</a>
+            </div>
+
+            <div class="col">
+                <h3>Follow Us</h3>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">Pinterest</a>
+            </div>
+        </div>
+
+        <div class="bottomtext">
+            <p>&copy; 2026 Wreak Fashion. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

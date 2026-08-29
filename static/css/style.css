@@ -1172,3 +1172,34 @@ textarea.continput {
 	margin-right: 12px;
 	align-self: center;
 }
+
+/** Account page **/
+
+.accountnav {
+	margin: 0;
+}
+
+.accountnav a {
+	display: block;
+	margin: 0 0 14px 0;
+	color: #c9a66b;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.accountleft {
+	width: 28%;
+	padding-right: 24px;
+	box-sizing: border-box;
+}
+
+.accountright {
+	width: 72%;
+	padding-left: 30px;
+	box-sizing: border-box;
+	border-left: 1px solid #e8e0d4;
+}
+
+.accountcard {
+	max-width: unset;
+}

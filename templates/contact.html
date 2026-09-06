@@ -32,7 +32,7 @@
     
     <header>
         <div class="logo">
-            <a href="#" class="logolink">
+            <a href="/" class="logolink">
                 <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="40" height="40">
                 <div class="logotext">
                     <span class="logo1">Wear</span>
@@ -42,14 +42,20 @@
         </div>
 
         <nav>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
             <a href="/category/1">Women</a>
             <a href="/category/2">Men</a>
             <a href="/contact">Contact</a>
         </nav>
 
         <div class="icons">
-            <a href="#" class="iconbox">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href="/account" class="iconbox" title="Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
+            <a href="/login" class="iconbox">
                 <img src="/static/images/account.svg" alt="account" width="22" height="22">
             </a>
         </div>

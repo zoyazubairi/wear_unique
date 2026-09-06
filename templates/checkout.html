@@ -31,7 +31,7 @@
     </div>
     <header>
         <div class="logo">
-            <a href="#" class="logolink">
+            <a href="/" class="logolink">
                 <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="40" height="40">
                 <div class="logotext">
                     <span class="logo1">Wear</span>
@@ -41,14 +41,19 @@
         </div>
 
         <nav>
-            <a href="#">Home</a>
+            <a href="/">Home</a>
             <a href="/category/1">Women</a>
             <a href="/category/2">Men</a>
             <a href="/contact">Contact</a>
         </nav>
 
         <div class="icons">
-            <a href="#" class="iconbox">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href = "/account" class = "iconbox" title = "Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
                 <img src="/static/images/account.svg" alt="account" width="22" height="22">
             </a>
         </div>
@@ -57,6 +62,19 @@
     <div class="contpage">
         <div class="contcard{% if not done %} checkoutcard {% endif %}">
             <p class="contbrand">Wear Unique</p>
+            {% if done %}
+            <p class="contsub">Hi {{ full_name }}, your order is confirmed.</p>
+            <h2 class="title">Thank You!</h2>
+            <p class="label">Order number</p>
+            <p>#{{ order_id }}</p>
+            <p class="label">Item</p>
+            <p>{{ product.title }} - {{ variant.color }}{% if size %} / {{ size }}{% endif %}</p>
+            <p class="label">Total</p>
+            <p>{{ order.total_price }} Tk.</p>
+            <p class="label">Payment Method</p>
+            <p>Cash on Delivery</p>
+            <a href="/" class="buybtn contbtn">Back to Home</a>
+            {% else %}
             <h2 class="title">Checkout</h2>
             <div class="checkoutrow">
                 <div class="checkoutleft">
@@ -66,19 +84,23 @@
                         <input type="hidden" name="quantity" id="quantityinput" value="1">
 
                         <p class="label">Name</p>
-                        <p>Sarah</p>
+                        <p>{{ full_name }}</p>
 
                         <p class="label">Phone No.</p>
                         <div class="phonebox">
                             <span class="countrycode">+880</span>
-                            <input class="continput" type="tel" name="Phone" placeholder="1XXXXXXXXX" inputmode="numeric" pattern="[1-9][0-9]{9}" required>
+                            <input class="continput" type="tel" name="phone" placeholder="1XXXXXXXXX" inputmode="numeric" pattern="[1-9][0-9]{9}" required>
                         </div>
 
                         <p class="label">Address</p>
-                        <textarea class="continput" name="Address" rows="4" placeholder="Your Address" required></textarea>
+                        <textarea class="continput" name="address" rows="4" placeholder="Your Address" required></textarea>
 
                         <p class="label">Payment</p>
                         <p class="contsub">Cash On Delivery</p>
+
+                        <p class="ordernote">
+                            <strong>Note:</strong> Once the order is placed, it cannot be cancelled. 
+                        </p>
 
                         <button class="buybtn contbtn" type="submit">Place Order</button>
                     </form>
@@ -92,13 +114,11 @@
                         </div>
 
                         <div class="orderinfo">
-                            <div class="producttop">
-                                    
-                                    <div class="productname">
-                                        
-                                        <p class="ordertitle">{{ product.title }}</p>
-                                        <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
-                                    </div>
+                            <div class="producttop">  
+                                <div class="productname"> 
+                                    <p class="ordertitle">{{ product.title }}</p>
+                                    <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
+                                </div>
                             </div>
 
                             <div class="orderQtyWrapper">
@@ -109,7 +129,7 @@
                                 <div class="quantitybox">
                                     <div class="qtycontrol">
                                             <button type="button" onclick="changeQty(-1)">−</button>
-                                            <input id="quantity" name="quantity" value="1" readonly>
+                                            <input id="quantity" value="1" readonly>
 
                                             <button type="button" onclick="changeQty(1)">+</button>
                                     </div>
@@ -119,6 +139,7 @@
                     </div>
                 </div>
             </div>
+            {% endif %}
         </div>
     </div>
 

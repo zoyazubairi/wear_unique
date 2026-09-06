@@ -58,7 +58,8 @@ async def category_page(request: Request, id: str):
     
     return templates.TemplateResponse(request, "shop.html", {
         "category": category,
-        "productlist": productlist
+        "productlist": productlist,
+        "full_name": request.session.get("full_name"),
     })
 
 @app.api_route("/product/{id}", methods=["GET", "POST"])
@@ -104,8 +105,9 @@ async def product(request: Request, id: str):
         "resultpic": resultpic,
         "tryerror": tryerror,
         "recsize": recsize,
-        "recreason": recreason
-        })
+        "recreason": recreason,
+        "full_name": request.session.get("full_name"),
+    })
     
 @app.post("/size-advisor/{id}")
 async def size_advisor(request: Request, id: str):
@@ -136,7 +138,7 @@ async def size_advisor(request: Request, id: str):
     return RedirectResponse(
         f"/product/{id}?recsize={quote(recsize)}"
         f"&recreason={quote(recreason)}#sizeadvisor",
-        status_code=303
+        status_code = 303
     )
 
 TRYON_URL = "http://127.0.0.1:8005/tryon/"
@@ -195,7 +197,7 @@ async def upload_photo(pid: str = Form(...), chosenimg: str = Form(""), photo: U
         f"/product/{pid}?chosen={quote(chosenimg)}"
         f"&uploaded={quote(photo.filename)}"
         f"&result={quote(result_name)}&tryerror={quote(error)}",
-        status_code=303
+        status_code =303
     )
     
 @app.api_route("/checkout/{id}", methods=["GET", "POST"])
@@ -228,23 +230,59 @@ async def checkout(request: Request, id: str):
         phone = "+880" + form.get("phone")
         address = form.get("address")
         quantity = int(form.get("quantity"))
+        mycursor.execute(
+            "INSERT INTO orders (customer_id, variant_id, quantity, total_price, order_date, phone, address, payment, size) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
+            (request.session.get("user_id"), variant["id"], quantity, product["price"] * quantity, date.today(), phone, address, "Cash on Delivery", variant["size"]),
+        )
+        mydb.commit()
+        return RedirectResponse("/thanks/" + str(mycursor.lastrowid), status_code = 303)
     
     return templates.TemplateResponse (request, "checkout.html", {
         "product": product,
         "variant": variant,
-        # "size": variant["size"],
+        "size": variant["size"],
         "quantity": quantity,
-        "done": ""
+        "done": "",
+        "order_id": "",
+        "order": {},
+        "full_name": request.session.get("full_name"),
+    })
+    
+@app.get("/thanks/{oid}")
+async def thanks(request: Request, oid: str):
+    if not request.session.get("user_id"):
+        return RedirectResponse("/login", status_code=303)
+    
+    mycursor.execute("SELECT * FROM orders WHERE id = %s AND customer_id = %s", (oid, request.session.get("user_id")))
+    order = mycursor.fetchone()
+    
+    mycursor.execute("SELECT * FROM variants WHERE id = %s", (order["variant_id"],))
+    variant = mycursor.fetchone()
+    
+    mycursor.execute("SELECT * FROM products WHERE id = %s", (variant["product_id"],))
+    product = mycursor.fetchone()
+    
+    return templates.TemplateResponse(request, "checkout.html", {
+        "product": product,
+        "variant": variant,
+        "size": variant["size"],
+        "quantity": order["quantity"],
+        "order": order, 
+        "done": "Order placed successfully. Pay with cash when the product arrives.",
+        "order_id": order["id"],
+        "full_name": request.session.get("full_name"),
     })
     
 @app.get("/orders")
 async def orders(request: Request):
+    if not request.session.get("user_id"):
+        return RedirectResponse("/login", status_code=303)
 
     mycursor.execute("SELECT * FROM orders")
     orderlist = mycursor.fetchall()
     
     for item in orderlist:
-        mycursor.execute("SELECT * FROM variants WHERE id=%s", (item["variant_id"]))
+        mycursor.execute("SELECT * FROM variants WHERE id=%s", (item["variant_id"],))
     
         variant = mycursor.fetchone()
     
@@ -259,7 +297,8 @@ async def orders(request: Request):
         item["title"] = product["title"]
     
     return templates.TemplateResponse(request, "orders.html", {
-        "orderlist": orderlist
+        "orderlist": orderlist,
+        "full_name": request.session.get("full_name"),
     })
 
 

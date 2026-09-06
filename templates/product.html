@@ -12,6 +12,7 @@
         rel="stylesheet">
 
 </head>
+
 <body>
     <div class="announcebar">
         <div class="announcebar-track">
@@ -50,7 +51,12 @@
         </nav>
 
         <div class="icons">
-            <a href="#" class="iconbox">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href = "/account" class = "iconbox" title="Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
                 <img src="/static/images/account.svg" alt="account" width="22" height="22">
             </a>
         </div>
@@ -142,14 +148,22 @@
                     <p>Chosen Pic</p>
                     {% endif %}
                 </div>
-                <form method="post" action="/upload" enctype="multipart/form-data" class="uploadform">
+                <form method="post" action="/upload" enctype="multipart/form-data" class="uploadform"
+                onsubmit="const b=this.querySelector('.fileuploadbtn'); 
+                b.classList.add('is-loading'); 
+                b.disabled=true;
+                b.querySelector('.fileupload-text').textContent='Processing image...';">
                     <input type="hidden" name="pid" value="{{ product.id }}">
                     <input type="hidden" name="chosenimg" value="{{ chosenpic }}">
                     <label class="filebtn">Choose Photo
                         <input type="file" name="photo">
                     </label>
                     <p class="instruction">Upload a clear front-facing photo. Keep your face centered and looking directly at the camera.</p>
-                    <button class="buybtn fileuploadbtn" type="submit">Upload</button>
+                    <button class="buybtn fileuploadbtn" type="submit">
+                        <span class="fileupload-spinner"></span>
+                        <span class="fileupload-text">Upload</span>
+                    </button>
+
                 </form>
             </div>
 
@@ -173,7 +187,9 @@
             <div class="tryoncol">
                 <div class="tryonbox2">
                 {%if resultpic %}
-                <img src="/static/uploads/{{ resultpic }}" alt="try-on result">
+                <a href="/static/uploads/{{ resultpic }}" target="_blank">
+                    <img src="/static/uploads/{{ resultpic }}" alt="try-on result" class="zoomimage">
+                </a>
                 {% else %}  
                 <p>Final Photo</p>
                 {% endif %} 

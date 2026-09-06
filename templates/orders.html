@@ -32,7 +32,7 @@
     
     <header>
         <div class="logo">
-            <a href="#" class="logolink">
+            <a href="/" class="logolink">
                 <img class="logoimg" src="/static/images/logo.svg" alt="logo" width="40" height="40">
                 <div class="logotext">
                     <span class="logo1">Wear</span>
@@ -49,7 +49,12 @@
         </nav>
 
         <div class="icons">
-            <a href="#" class="iconbox">
+            {% if full_name %}
+            <span class="username">{{ full_name }}</span>
+            <a href="/account" class="iconbox" title="Account">
+            {% else %}
+            <a href="/login" class="iconbox" title="Account">
+            {% endif %}
                 <img src="/static/images/account.svg" alt="account" width="22" height="22">
             </a>
         </div>
@@ -62,9 +67,9 @@
             <div class="checkoutrow">
                 <div class="accountleft">
                     <div class="accountnav">
-                        <a href="#">Profile</a>
+                        <a href="/account">Profile</a>
                         <a href="/orders">Orders</a>
-                        <a href="#">Logout</a>
+                        <a href="/logout">Logout</a>
                     </div>
                 </div>
 
@@ -75,24 +80,24 @@
                     {% for item in orderlist %}
                     <div class="orderitem">
                         <div class="orderpic">
-                            <img src="/static/{{ variant.image }}" alt="{{product.title}}">
-                            <span class="qtydot" id="qtydot">{{ quantity }}</span>
+                            <img src="/static/{{ item.image }}" alt="{{ item.title }}">
+                            <span class="qtydot" id="qtydot">{{ item.quantity }}</span>
                         </div>
                          <div class="orderinfo">
-                            <div class="producttop">
-                                <div class="productname">
-                                    <p class="ordertitle">{{ product.title }}</p>
-                                    <p class="ordercolor">{{ variant.color }}{% if size %} / {{size}}{% endif %}</p>
-                                    <p class="ordercolor">{{ product.price }}</p>
-                                </div>
+                                <p class="ordertitle">{{ item.title }}</p>
+                                <p class="ordercolor">{{ item.color }}{% if item.size %} / {{item.size}}{% endif %}</p>
+                                <p class="ordercolor">{{ item.total_price }}</p>
+                                <p class="ordercolor">{{ item.payment }}</p>
                             </div>
 
                             <div class="orderQtyWrapper">
                                 <p class="orderprice">
-                                    <span id="totalprice">{{ product.price }}</span> Tk
+                                    <span id="totalprice">{{ item.total_price }}</span> Tk
                                 </p>
                             </div>
+                        </div>
                             {% endfor %}
+
                             {% else %}
                             <p class="contsub">No Orders Yet.</p>
                             {% endif %}

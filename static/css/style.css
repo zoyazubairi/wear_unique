@@ -615,8 +615,14 @@ nav a:hover {
 	background: #fafafa;
 }
 
+.tryonbox2 a{
+	width: 100%;
+}
+
 .tryonbox2 img {
-    width: -webkit-fill-available;
+    width: 100%;
+	display: flex;
+    aspect-ratio: 1;
 }
 
 .tryonbox p {
@@ -1216,4 +1222,175 @@ textarea.continput {
 
 .accountcard {
 	max-width: unset;
+}
+
+/* Mobile Responsive Design */
+@media (max-width: 800px) {
+
+	/* header */
+
+	header {
+		padding: 12px 16px;
+	}
+
+	nav {
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	nav a {
+		margin-right: 14px;
+		margin-bottom: 8px;
+		font-size: 13px;
+	}
+
+	/* pdp / home / login */
+
+	.buybox,
+	.homesection,
+	.authpage,
+	.uploadbox {
+		padding: 30px 16px;
+	}
+
+	/* pdp */
+
+	.gallery,
+	.info {
+		width: 100%;
+		margin-right: 0;
+	}
+
+	.title {
+		font-size: 28px;
+	}
+
+	.uspitem {
+		width: 48%;
+		margin-bottom: 16px;
+	}
+
+	/* home */
+
+	.hero {
+		height: 380px;
+		padding: 0 20px;
+	}
+
+	.herotitle {
+		font-size: 32px;
+	}
+
+	/* home + shop */
+
+	.prodcard {
+		width: 48%;
+	}
+
+	.prodcard img {
+		height: 220px;
+	}
+
+	/* home featured */
+
+	.featcard {
+		width: 100%;
+	}
+
+	.featcard img {
+		height: 420px;
+	}
+
+	/* pdp try on */
+
+	.tryonrow {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.tryoncol,
+	.tryonbox,
+	.filebtn,
+	.fileuploadbtn {
+		width: 100%;
+	}
+
+	.tryonbox {
+		height: auto;
+	}
+
+	.magicbox{
+		height: 100%;
+        max-height: 1000px;
+        min-height: 300px;
+	}
+
+	.tryonsign {
+		width: 100%;
+		height: 40px;
+		text-align: center;
+		margin: 0;
+	}
+
+	.tryonbox2 {
+		width: 100%;
+		height: auto;
+	}
+
+	.tryonbox2 img {
+    width: 100%;
+    height: 100%;
+}
+	.tryonbox2 a {
+		display: flex;
+	}
+
+	/* checkout / account */
+
+	.checkoutrow {
+		display: block;
+	}
+
+	.checkoutleft,
+	.checkoutright,
+	.accountleft,
+	.accountright {
+		width: 100%;
+		padding: 0;
+		border: none;
+	}
+
+	.checkoutright,
+	.accountright {
+		margin-top: 24px;
+		padding-top: 24px;
+		border-top: 1px solid #e8e0d4;
+	}
+
+	/* login / signup / contact */
+
+	.authcard {
+		padding: 24px 18px;
+	}
+
+	/* account */
+
+	.accountnav a {
+		display: inline-block;
+		margin-right: 16px;
+	}
+
+	.orderprice {
+		margin-left: 0;
+	}
+
+	.orderinfo {
+		flex-direction: column;
+	}
+
+	/* footer */
+
+	footer .col {
+		min-width: 160px;
+	}
 }

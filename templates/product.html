@@ -80,8 +80,8 @@
             <h2 class="title">{{product.title}}</h2>
             <p  class="price">{{product.price}} Tk.</p>
 
-            <p class="label">Select Color</p>
             <form method="get" action="/checkout/{{ product.id }}">
+                <p class="label">Select Color</p>
                 <div class="sizebox">
                     {% for item in colorlist %}
                     <label class="size">
